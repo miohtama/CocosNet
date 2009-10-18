@@ -1,3 +1,7 @@
+// CocosNet, Cocos2D in C#
+// Copyright 2009 Matthew Greer
+// See LICENSE file for license, and README and AUTHORS for more info
+
 using OpenTK.Graphics.ES11;
 using System;
 using System.Collections.Generic;

@@ -19,9 +19,9 @@ namespace Cocos2dPortedTests {
 			cocosImage.Scale = 2.5f;
 			cocosImage.AnchorPoint = PointF.Empty;
 			
-			TileMapAtlas tileMap = new TileMapAtlas("tiles.png", "levelMap.tga", 16, 16);
-			
-			tileMap.AnchorPoint = PointF.Empty;
+//			TileMapAtlas tileMap = new TileMapAtlas("tiles.png", "levelMap.tga", 16, 16);
+//			
+//			tileMap.AnchorPoint = PointF.Empty;
 			
 			Sprite background = new Sprite("background.png");
 			
@@ -31,7 +31,7 @@ namespace Cocos2dPortedTests {
 			ParallaxNode voidNode = new ParallaxNode();
 			
 			voidNode.AddChild(background, -1, new PointF(0.4f, 0.5f), PointF.Empty);
-			voidNode.AddChild(tileMap, 1, new PointF(2.2f, 1f), new PointF(0, -200));
+//			voidNode.AddChild(tileMap, 1, new PointF(2.2f, 1f), new PointF(0, -200));
 			voidNode.AddChild(cocosImage, 2, new PointF(3f, 2.5f), new PointF(200, 800));
 			
 			var goUp = new MoveBy(4, new PointF(0, -500));

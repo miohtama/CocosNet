@@ -13,3 +13,16 @@ go many places.
 
 Please see the LICENSE file for licensing information
 
+
+
+TO RUN
+======
+- Compile CocosNetLib and Cocos2DPortedTests (You can just open the root .sln file in MonoDevelop and hit Cmnd-b)
+- Launch in the simulator, one of the ported tests should start.
+- Go into Main.cs in Cocos2DPortedTests and change the instantiated Scene to change the test. It's commented like this
+
+			// To run a different test, instantiate a different class here
+			// SpriteTest -- SpriteManual
+			// ParallaxTest -- Parallax1
+			Scene scene = new Scene(new SpriteManual());
+

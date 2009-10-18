@@ -1,0 +1,15 @@
+CocosNet README 10/17/2009
+========
+matt.e.greer@gmail.com 
+http://github.com/city41/CocosNet
+#monotouch on irc.gnome.org
+
+This is a very new project, started about a week ago. It is a port of Cocos2D to MonoTouch. Which is inturn a port of Cocos to the iPhone.
+The short term goal of this project is to have a full fledged version of Cocos running in the MonoTouch environment.
+The long term goal is to extend CocosNet to all .NET based platforms to enable 2D games to easily go all over the place. 
+For now MonoTouch is the focus, and then all .NET platforms that have OpenGL bindings will be the next focus, then any environments
+that require a different graphics lib such as XNA on the Xbox.
+
+
+Please see the LICENSE file for licensing information
+

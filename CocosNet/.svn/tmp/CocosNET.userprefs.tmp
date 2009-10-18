@@ -1,0 +1,49 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" ctype="Workspace" />
+  <MonoDevelop.Ide.DebuggingService>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService>
+  <MonoDevelop.Ide.Workbench ActiveDocument="CocosNetLib/Labels/LabelAtlas.cs" ctype="Workbench">
+    <Files>
+<<<<<<< .mine
+      <File FileName="CocosNetLib/TextureAtlas.cs" Line="138" Column="1" />
+      <File FileName="CocosNetLib/Base/Types.cs" Line="1" Column="1" />
+      <File FileName="CocosNetLib/Base/TextureNode.cs" Line="1" Column="1" />
+      <File FileName="CocosNetLib/Base/CocosNode.cs" Line="1" Column="1" />
+=======
+      <File FileName="CocosNetLib/TextureAtlas.cs" Line="96" Column="27" />
+      <File FileName="CocosNetLib/Base/Types.cs" Line="123" Column="14" />
+      <File FileName="CocosNetLib/Base/TextureNode.cs" Line="1" Column="1" />
+      <File FileName="CocosNetLib/Base/CocosNode.cs" Line="1" Column="1" />
+      <File FileName="CocosNetLib/Labels/LabelAtlas.cs" Line="25" Column="48" />
+      <File FileName="Cocos2dPortedTests/Main.cs" Line="26" Column="35" />
+      <File FileName="Cocos2dPortedTests/SpriteTest.cs" Line="1" Column="1" />
+      <File FileName="CocosNetLib/Base/AtlasNode.cs" Line="11" Column="10" />
+      <File FileName="CocosNetLib/Tiles/TileMapAtlas.cs" Line="13" Column="2" />
+      <File FileName="CocosNetLib/Director.cs" Line="129" Column="28" />
+>>>>>>> .r13
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Cocos2dPortedTests" expanded="True" />
+          <Node name="CocosNetLib" expanded="True">
+            <Node name="Base" expanded="True" />
+            <Node name="Labels" expanded="True">
+              <Node name="LabelAtlas.cs" selected="True" />
+            </Node>
+            <Node name="Layers" expanded="True" />
+            <Node name="Menus" expanded="True" />
+            <Node name="Resources" expanded="True" />
+            <Node name="Sprites" expanded="True" />
+            <Node name="Support" expanded="True" />
+            <Node name="Tiles" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>

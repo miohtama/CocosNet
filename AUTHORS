@@ -1,8 +1,10 @@
 CocosNet Authors
 ===============
-Cocos2D for Python was written by many people, home page here: http://cocos2d.org
+Cocos2D for Python was written by many people, including Daniel Moisset, Ricardo Quesada,
+Rayentray Tappa, and Lucio Torre. http://cocos2d.org
 
 Cocos2D for the iPhone is headed by Ricardo Quesada, and many people have contributed to it. Please
-see the Cocos2D AUTHORS file that ships with it.
+see the Cocos2D AUTHORS file that ships with it. http://www.cocos2d-iphone.org/
 
 CocosNet is being ported by Matt Greer. So far with some help from people on #monotouch (irc.gnome.org)
+

@@ -65,7 +65,10 @@ namespace CocosNet.Support {
 		public void TouchesBegan(NSSet touchSet, UIEvent evnt) {
 			if (DispatchEvents) {
 				List<TouchHandler> handlers = new List<TouchHandler>(_touchHandlers);
-				List<UITouch> touches = new List<UITouch>(touchSet.ToArray<UITouch>());
+				// Make full-aot aware of the needed ICollection<UITouch> types
+				ICollection<UITouch> touches_col = (ICollection <UITouch>) touchSet.ToArray<UITouch>();
+				int touches_count = touches_col.Count;
+				List<UITouch> touches = new List<UITouch>(touches_col);
 				
 				foreach (TouchHandler handler in handlers) {
 					if (handler.TouchesBegan(touches, evnt)) {
@@ -81,7 +84,10 @@ namespace CocosNet.Support {
 		public void TouchesMoved(NSSet touchSet, UIEvent evnt) {
 			if (DispatchEvents) {
 				List<TouchHandler> handlers = new List<TouchHandler>(_touchHandlers);
-				List<UITouch> touches = new List<UITouch>(touchSet.ToArray<UITouch>());
+				// Make full-aot aware of the needed ICollection<UITouch> types
+				ICollection<UITouch> touches_col = (ICollection <UITouch>) touchSet.ToArray<UITouch>();
+				int touches_count = touches_col.Count;
+				List<UITouch> touches = new List<UITouch>(touches_col);
 				
 				foreach (TouchHandler handler in handlers) {
 					if (handler.TouchesMoved(touches, evnt)) {
@@ -97,7 +103,10 @@ namespace CocosNet.Support {
 		public void TouchesEnded(NSSet touchSet, UIEvent evnt) {
 			if (DispatchEvents) {
 				List<TouchHandler> handlers = new List<TouchHandler>(_touchHandlers);
-				List<UITouch> touches = new List<UITouch>(touchSet.ToArray<UITouch>());
+				// Make full-aot aware of the needed ICollection<UITouch> types
+				ICollection<UITouch> touches_col = (ICollection <UITouch>) touchSet.ToArray<UITouch>();
+				int touches_count = touches_col.Count;
+				List<UITouch> touches = new List<UITouch>(touches_col);
 				
 				foreach (TouchHandler handler in handlers) {
 					if (handler.TouchesEnded(touches, evnt)) {
@@ -113,7 +122,10 @@ namespace CocosNet.Support {
 		public void TouchesCancelled(NSSet touchSet, UIEvent evnt) {
 			if (DispatchEvents) {
 				List<TouchHandler> handlers = new List<TouchHandler>(_touchHandlers);
-				List<UITouch> touches = new List<UITouch>(touchSet.ToArray<UITouch>());
+				// Make full-aot aware of the needed ICollection<UITouch> types
+				ICollection<UITouch> touches_col = (ICollection <UITouch>) touchSet.ToArray<UITouch>();
+				int touches_count = touches_col.Count;
+				List<UITouch> touches = new List<UITouch>(touches_col);
 				
 				foreach (TouchHandler handler in handlers) {
 					if (handler.TouchesCancelled(touches, evnt)) {

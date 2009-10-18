@@ -37,21 +37,39 @@ namespace CocosNet {
 		
 		[DllImport(MonoTouch.Constants.ObjectiveCLibrary, EntryPoint="objc_msgSend")]
 		private static extern SizeF cgsize_objc_msgSend_IntPtr_IntPtr(IntPtr target, IntPtr selector, IntPtr font);
+		[DllImport(MonoTouch.Constants.ObjectiveCLibrary, EntryPoint="objc_msgSend_stret")]
+		private static extern void void_objc_msgSend_stret_SizeF_IntPtr_IntPtr(out SizeF size, IntPtr target, IntPtr selector, IntPtr font);
 		
+		// FIXME: Use UIView.StringSize instead
 		public static SizeF SizeWithFont(this string str, UIFont font) {
 			NSString nsstring = new NSString(str);
 			Selector selector = new Selector("sizeWithFont:");
+			SizeF size;
 			
-			return cgsize_objc_msgSend_IntPtr_IntPtr(nsstring.Handle, selector.Handle, font.Handle);
+			if (Runtime.Arch == Arch.DEVICE) {
+				void_objc_msgSend_stret_SizeF_IntPtr_IntPtr (out size, nsstring.Handle, selector.Handle, font.Handle);
+			} else {
+				size = cgsize_objc_msgSend_IntPtr_IntPtr(nsstring.Handle, selector.Handle, font.Handle);
+			}
+			return size;
 		}
 		
 		[DllImport(MonoTouch.Constants.ObjectiveCLibrary, EntryPoint = "objc_msgSend")]
-		private static extern void void_objc_msgSend_IntPtr_RectangleF_IntPtr_UILineBreakMode_UITextAlignment(IntPtr target, IntPtr selector, RectangleF rect, IntPtr font, UILineBreakMode lineBreak, UITextAlignment alignment);
+		private static extern SizeF SizeF_objc_msgSend_IntPtr_RectangleF_IntPtr_UILineBreakMode_UITextAlignment(IntPtr target, IntPtr selector, RectangleF rect, IntPtr font, UILineBreakMode lineBreak, UITextAlignment alignment);
+		[DllImport(MonoTouch.Constants.ObjectiveCLibrary, EntryPoint = "objc_msgSend_stret")]
+		private static extern void void_objc_msgSend_stret_SizeF_IntPtr_RectangleF_IntPtr_UILineBreakMode_UITextAlignment(out SizeF size, IntPtr target, IntPtr selector, RectangleF rect, IntPtr font, UILineBreakMode lineBreak, UITextAlignment alignment);
+		
+		// FIXME: Use UIView.DrawString
 		public static void DrawInRect(this string str, RectangleF rect, UIFont font, UILineBreakMode lineBreakMode, UITextAlignment alignment) {
 			NSString nsstring = new NSString(str);
 			Selector selector = new Selector("drawInRect:withFont:lineBreakMode:alignment:");
+			SizeF size;
 			
-			void_objc_msgSend_IntPtr_RectangleF_IntPtr_UILineBreakMode_UITextAlignment(nsstring.Handle, selector.Handle, rect, font.Handle, lineBreakMode, alignment);
+			if (Runtime.Arch == Arch.DEVICE) {
+				void_objc_msgSend_stret_SizeF_IntPtr_RectangleF_IntPtr_UILineBreakMode_UITextAlignment(out size, nsstring.Handle, selector.Handle, rect, font.Handle, lineBreakMode, alignment);
+			} else {
+				size = SizeF_objc_msgSend_IntPtr_RectangleF_IntPtr_UILineBreakMode_UITextAlignment(nsstring.Handle, selector.Handle, rect, font.Handle, lineBreakMode, alignment);
+			}
 		}
 	}
 }

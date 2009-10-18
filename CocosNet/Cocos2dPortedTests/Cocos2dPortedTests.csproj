@@ -89,7 +89,6 @@
     <Content Include="r1.png" />
     <Content Include="r2.png" />
     <Content Include="tf2.jpg" />
-    <Content Include="moonwalker.jpg" />
     <Content Include="powered.png" />
     <Content Include="fps_images.png" />
   </ItemGroup>

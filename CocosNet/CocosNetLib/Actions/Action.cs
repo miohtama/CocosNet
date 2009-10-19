@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using CocosNet.Base;
+using Color = CocosNet.Base.Color;
 
 namespace CocosNet.Actions {
 	public abstract class Action : ICloneable {
@@ -43,43 +44,6 @@ namespace CocosNet.Actions {
 		}
 
 		public abstract Action Reverse();
-	}
-
-	public class RepeatForever : Action {
-		private IntervalAction _repeatedAction;
-
-		public RepeatForever(IntervalAction repeatedAction) {
-			if (repeatedAction == null) {
-				throw new ArgumentNullException("repeatedAction");
-			}
-			
-			_repeatedAction = repeatedAction;
-		}
-
-		public override object Clone() {
-			return new RepeatForever(_repeatedAction);
-		}
-
-		public override void Start() {
-			_repeatedAction.Target = Target;
-			_repeatedAction.Start();
-		}
-
-		public override void Step(float t) {
-			_repeatedAction.Step(t);
-			if (_repeatedAction.IsDone) {
-				_repeatedAction.Start();
-			}
-		}
-
-		public override bool IsDone {
-			get { return false; }
-		}
-
-		public override Action Reverse() {
-			return new RepeatForever(_repeatedAction.Reverse() as IntervalAction);
-		}
-		
 	}
 
 	public abstract class FiniteTimeAction : Action {
@@ -122,6 +86,174 @@ namespace CocosNet.Actions {
 			_elapsed = 0;
 			_firstTick = true;
 		}
+	}
+
+	public abstract class InstantAction : FiniteTimeAction {
+		public InstantAction() {
+			Duration = 0;
+		}
+
+		public override bool IsDone {
+			get { return true; }
+		}
+
+		public override void Step(float t) {
+			Update(1);
+		}
+
+		public override void Update(float t) {
+			// do nothing
+		}
+		
+	}
+
+	public class Place : InstantAction {
+		private PointF _position;
+
+		public Place(PointF position) {
+			_position = position;
+		}
+
+		public override object Clone() {
+			return new Place(_position);
+		}
+
+		public override Action Reverse() {
+			throw new NotImplementedException("Can't reverse a Place");
+		}
+
+		public override void Start() {
+			Target.SetPosition(_position.X, _position.Y);
+		}
+	}
+
+	public class ToggleVisibility : InstantAction {
+		public override void Start() {
+			Target.Visible = !Target.Visible;
+		}
+
+		public override object Clone() {
+			return new ToggleVisibility();
+		}
+
+		public override Action Reverse() {
+			return new ToggleVisibility();
+		}
+	}
+
+	public class Hide : InstantAction {
+		public override void Start() {
+			Target.Visible = false;
+		}
+
+		public override object Clone() {
+			return new Hide();
+		}
+
+		public override Action Reverse() {
+			return new Show();
+		}
+	}
+
+	public class Show : InstantAction {
+		public override void Start() {
+			Target.Visible = true;
+		}
+
+		public override object Clone() {
+			return new Show();
+		}
+
+		public override Action Reverse() {
+			return new Hide();
+		}
+	}
+
+	public class Repeat : IntervalAction {
+		private FiniteTimeAction _other;
+		private int _times;
+		private int _total;
+
+		public Repeat(FiniteTimeAction other, int times) : base(other == null ? 0 : other.Duration * times) {
+			if (other == null) {
+				throw new ArgumentNullException("other");
+			}
+			
+			_times = times;
+			_other = other;
+			
+			_total = 0;
+		}
+
+		public override object Clone() {
+			return new Repeat(_other.Clone() as FiniteTimeAction, _times);
+		}
+
+		public override Action Reverse() {
+			throw new NotImplementedException("Can't reverse a Repeat");
+		}
+
+		public override void Start() {
+			_total = 0;
+			base.Start();
+			_other.Target = Target;
+			_other.Start();
+		}
+
+		public override void Update(float dt) {
+			float t = dt * _times;
+			float r = t % 1f;
+			if (t > _total + 1) {
+				_other.Update(1f);
+				++_total;
+				_other.Stop();
+				_other.Start();
+				_other.Update(0);
+			} else {
+				if (dt == 1f) {
+					r = 1f;
+					++_total;
+				}
+				_other.Update(Math.Min(r, 1f));
+			}
+		}
+	}
+
+	public class RepeatForever : Action {
+		private IntervalAction _repeatedAction;
+
+		public RepeatForever(IntervalAction repeatedAction) {
+			if (repeatedAction == null) {
+				throw new ArgumentNullException("repeatedAction");
+			}
+			
+			_repeatedAction = repeatedAction;
+		}
+
+		public override object Clone() {
+			return new RepeatForever(_repeatedAction);
+		}
+
+		public override void Start() {
+			_repeatedAction.Target = Target;
+			_repeatedAction.Start();
+		}
+
+		public override void Step(float t) {
+			_repeatedAction.Step(t);
+			if (_repeatedAction.IsDone) {
+				_repeatedAction.Start();
+			}
+		}
+
+		public override bool IsDone {
+			get { return false; }
+		}
+
+		public override Action Reverse() {
+			return new RepeatForever(_repeatedAction.Reverse() as IntervalAction);
+		}
+		
 	}
 
 	public class Sequence : IntervalAction {
@@ -227,6 +359,105 @@ namespace CocosNet.Actions {
 		
 	}
 
+	public class Spawn : IntervalAction {
+		public static Spawn Construct(params FiniteTimeAction[] actions) {
+			if (actions == null) {
+				throw new ArgumentNullException("actions");
+			}
+			
+			if (actions.Length < 2) {
+				throw new ArgumentException("Must construct spawn with at least 2 actions", "actions");
+			}
+			
+			FiniteTimeAction prev = actions[0];
+			
+			for (int i = 1; i < actions.Length; ++i) {
+				FiniteTimeAction now = actions[i];
+				prev = new Spawn(prev, now);
+			}
+			
+			return prev as Spawn;
+		}
+
+		private FiniteTimeAction _first;
+		private FiniteTimeAction _second;
+
+		public Spawn(FiniteTimeAction first, FiniteTimeAction second) 
+				: base((first == null || second == null) ? 0 : Math.Max(first.Duration, second.Duration)) {
+			
+			if (first == null) {
+				throw new ArgumentNullException("first");
+			}
+			if (second == null) {
+				throw new ArgumentNullException("second");
+			}
+			
+			_first = first;
+			_second = second;
+			
+			if (_first.Duration > _second.Duration) {
+				_second = Sequence.Construct(_second, new DelayTime(_first.Duration - _second.Duration));
+			} else {
+				_first = Sequence.Construct(_first, new DelayTime(_second.Duration - _first.Duration));
+			}
+		}
+
+		public override object Clone() {
+			return new Spawn(_first.Clone() as FiniteTimeAction, _second.Clone() as FiniteTimeAction);
+		}
+
+		public override void Start() {
+			base.Start();
+			_first.Target = Target;
+			_second.Target = Target;
+			_first.Start();
+			_second.Start();
+		}
+
+		public override void Update(float t) {
+			_first.Update(t);
+			_second.Update(t);
+		}
+
+		public override Action Reverse() {
+			return new Spawn(_first.Reverse() as FiniteTimeAction, _second.Reverse() as FiniteTimeAction);
+		}
+	}
+	
+	public class ReverseTime : IntervalAction {
+		private FiniteTimeAction _action;
+
+		public ReverseTime(FiniteTimeAction action) : base(action == null ? 0 : action.Duration) {
+			if (action == null) {
+				throw new ArgumentNullException("action");
+			}
+			_action = action;
+		}
+
+		public override object Clone() {
+			return new ReverseTime(_action.Clone() as FiniteTimeAction);
+		}
+
+		public override void Start() {
+			base.Start();
+			_action.Target = Target;
+			_action.Start();
+		}
+
+		public override void Stop() {
+			_action.Stop();
+			base.Stop();
+		}
+
+		public override void Update(float t) {
+			_action.Update(1f - t);
+		}
+
+		public override Action Reverse() {
+			return _action.Clone() as Action;
+		}
+	}
+	
 	public class MoveTo : IntervalAction {
 		protected PointF _endPosition;
 		protected PointF _startPosition;
@@ -509,41 +740,41 @@ namespace CocosNet.Actions {
 			return new BezierBy(Duration, _config.Negate());
 		}
 	}
-	
+
 	public class Blink : IntervalAction {
 		private uint _times;
-		
+
 		public Blink(float duration, uint times) : base(duration) {
 			_times = times;
 		}
-		
+
 		public override object Clone() {
 			return new Blink(Duration, _times);
 		}
 
-		public override void Update (float t) {
-			float slice = 1.0f / _times;
+		public override void Update(float t) {
+			float slice = 1f / _times;
 			float m = t % slice;
-			Target.Visible = m > (slice / 2.0f);
+			Target.Visible = m > (slice / 2f);
 		}
 
 		public override Action Reverse() {
 			return Clone() as Blink;
 		}
 	}
-	
+
 	public class FadeIn : IntervalAction {
 		public FadeIn(float duration) : base(duration) {
 		}
-		
+
 		public override void Update(float t) {
-			Target.Opacity = (byte)(255 * t);
+			(Target as TextureNode).Opacity = (byte)(255 * t);
 		}
-		
+
 		public override Action Reverse() {
 			return new FadeOut(Duration);
 		}
-		
+
 		public override object Clone() {
 			return new FadeIn(Duration);
 		}
@@ -552,17 +783,105 @@ namespace CocosNet.Actions {
 	public class FadeOut : IntervalAction {
 		public FadeOut(float duration) : base(duration) {
 		}
-		
+
 		public override void Update(float t) {
-			Target.Opacity = (byte)(255 * (1.0f - t));
+			// FadeIn and FadeOut have to have TextureNodes as their Targets.
+			// Still trying to decide how to work with some of Cocos2D's weak typing,
+			// in Cocos2D they are just ids.
+			(Target as TextureNode).Opacity = (byte)(255 * (1f - t));
 		}
-		
+
 		public override Action Reverse() {
 			return new FadeIn(Duration);
 		}
-		
+
 		public override object Clone() {
 			return new FadeOut(Duration);
+		}
+	}
+
+	public class TintTo : IntervalAction {
+		private Color _from;
+		private Color _to;
+
+		public TintTo(float duration, byte red, byte green, byte blue) : base(duration) {
+			_to = Colors.New(red, green, blue, 255);
+		}
+
+		public override object Clone() {
+			return new TintTo(Duration, _to.R, _to.G, _to.G);
+		}
+
+		public override void Start() {
+			base.Start();
+			
+			_from = (Target as TextureNode).Color;
+		}
+
+		public override void Update(float t) {
+			byte r = Convert.ToByte(_from.R + (_to.R - _from.R) * t);
+			byte g = Convert.ToByte(_from.G + (_to.G - _from.G) * t);
+			byte b = Convert.ToByte(_from.B + (_to.B - _from.B) * t);
+			
+			(Target as TextureNode).SetRgb(r, g, b);
+		}
+
+		public override Action Reverse() {
+			throw new NotImplementedException("TintTo can't be reversed");
+		}
+		
+	}
+
+	public class TintBy : IntervalAction {
+		private Color _from;
+
+		private short _dr;
+		private short _dg;
+		private short _db;
+
+
+		public TintBy(float duration, short dr, short dg, short db) : base(duration) {
+			_dr = dr;
+			_dg = dg;
+			_db = db;
+		}
+
+		public override object Clone() {
+			return new TintBy(Duration, _dr, _dg, _db);
+		}
+
+		public override void Start() {
+			base.Start();
+			_from = (Target as TextureNode).Color;
+		}
+
+		public override void Update(float t) {
+			byte r = Convert.ToByte(_from.R + _dr * t);
+			byte g = Convert.ToByte(_from.G + _dg * t);
+			byte b = Convert.ToByte(_from.B + _db * t);
+			
+			(Target as TextureNode).SetRgb(r, g, b);
+		}
+
+		public override Action Reverse() {
+			return new TintBy(Duration, (short)-_dr, (short)-_dg, (short)-_db);
+		}
+	}
+
+	public class DelayTime : IntervalAction {
+		public DelayTime(float duration) : base(duration) {
+		}
+
+		public override void Update(float t) {
+			// just killing time...
+		}
+
+		public override object Clone() {
+			return new DelayTime(Duration);
+		}
+
+		public override Action Reverse() {
+			return Clone() as Action;
 		}
 	}
 }

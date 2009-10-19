@@ -16,7 +16,6 @@ namespace CocosNet.Base {
 	public class CocosNode {
 		public const int CocosNodeTagInvalid = -1;
 
-		private Color _color = Colors.White;
 		private int _zorder;
 		private Camera _camera;
 		private PointF _transformAnchor;
@@ -34,24 +33,6 @@ namespace CocosNet.Base {
 
 		private List<CocosNode> _children;
 
-		public Color Color {
-			get {
-				return _color;
-			}
-			set {
-				_color = value;
-			}
-		}
-		
-		public byte Opacity {
-			get {
-				return _color.A;
-			}
-			set {
-				_color.A = value;
-			}
-		}
-		
 		public IList<CocosNode> Children {
 			get { return _children; }
 		}

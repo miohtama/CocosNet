@@ -93,6 +93,7 @@
     <Compile Include="Base\Types.cs" />
     <Compile Include="Support\Util.cs" />
     <Compile Include="Actions\BezierConfig.cs" />
+    <Compile Include="Actions\CameraAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base\" />

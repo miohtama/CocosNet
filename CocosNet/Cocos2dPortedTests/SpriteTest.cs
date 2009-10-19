@@ -26,18 +26,18 @@ namespace Cocos2dPortedTests {
 			new SpriteJump(),
 			new SpriteBezier(),
 			new SpriteBlink(),
-			new SpriteFade()
-//			new SpriteTint(),
+			new SpriteFade(),
+			new SpriteTint(),
 //			new SpriteAnimate(),
-//			new SpriteSequence(),
-//			new SpriteSpawn(),
-//			new SpriteReverse(),
-//			new SpriteDelayTime(),
-//			new SpriteRepeat(),
+			new SpriteSequence(),
+			new SpriteSpawn(),
+			new SpriteReverse(),
+			new SpriteDelayTime(),
+			new SpriteRepeat(),
 //			new SpriteCallFunc(),
-//			new SpriteReverseSequence(),
-//			new SpriteReverseSequence2(),
-//			new SpriteOrbit()
+			new SpriteReverseSequence(),
+			new SpriteReverseSequence2(),
+			new SpriteOrbit()
 		};
 
 		private static CocosNode NextAction() {
@@ -340,6 +340,207 @@ namespace Cocos2dPortedTests {
 
 		public override string ToString() {
 			return "FadeIn / FadeOut";
+		}
+	}
+
+	public class SpriteTint : SpriteDemo {
+		public override void OnEnter() {
+			base.OnEnter();
+			
+			CenterSprites();
+			
+			TintTo action1 = new TintTo(2, 255, 0, 255);
+			TintBy action2 = new TintBy(2, -127, -255, -127);
+			TintBy action2Back = action2.Reverse() as TintBy;
+			
+			_tamara.RunAction(action1);
+			_grossini.RunAction(new Sequence(action2, action2Back));
+		}
+
+		public override object Clone() {
+			return new SpriteTint();
+		}
+
+		public override string ToString() {
+			return "TintTo / TintBy";
+		}
+	}
+
+	public class SpriteSequence : SpriteDemo {
+		public override void OnEnter() {
+			base.OnEnter();
+			_tamara.Visible = false;
+			
+			Sequence action = Sequence.Construct(new MoveBy(2, new PointF(240, 0)), new RotateBy(2, 540));
+			
+			_grossini.RunAction(action);
+		}
+
+		public override object Clone() {
+			return new SpriteSequence();
+		}
+
+		public override string ToString() {
+			return "Sequence: Move + Rotate";
+		}
+	}
+
+	public class SpriteSpawn : SpriteDemo {
+		public override void OnEnter() {
+			base.OnEnter();
+			_tamara.Visible = false;
+			
+			Spawn action = Spawn.Construct(new JumpBy(2, new PointF(300, 0), 50, 4), new RotateBy(2, 720));
+			
+			_grossini.RunAction(action);
+		}
+
+		public override object Clone() {
+			return new SpriteSpawn();
+		}
+
+		public override string ToString() {
+			return "Spawn: Jump + Rotate";
+		}
+	}
+
+	public class SpriteReverse : SpriteDemo {
+		public override void OnEnter() {
+			base.OnEnter();
+			_tamara.Visible = false;
+			
+			JumpBy jump = new JumpBy(2, new PointF(300, 0), 50, 4);
+			Sequence action = Sequence.Construct(jump, jump.Reverse() as FiniteTimeAction);
+			
+			_grossini.RunAction(action);
+		}
+
+		public override object Clone() {
+			return new SpriteReverse();
+		}
+
+		public override string ToString() {
+			return "Reverse an action";
+		}
+		
+	}
+
+	public class SpriteDelayTime : SpriteDemo {
+		public override void OnEnter() {
+			base.OnEnter();
+			
+			_tamara.Visible = false;
+			MoveBy move = new MoveBy(1, new PointF(150, 0));
+			Sequence action = Sequence.Construct(move, new DelayTime(2), move);
+			
+			_grossini.RunAction(action);
+		}
+
+		public override object Clone() {
+			return new SpriteDelayTime();
+		}
+
+		public override string ToString() {
+			return "DelayTime: m + delay + m";
+		}
+		
+	}
+
+	public class SpriteRepeat : SpriteDemo {
+		public override void OnEnter() {
+			base.OnEnter();
+			
+			MoveBy a1 = new MoveBy(1, new PointF(150, 0));
+			Repeat action1 = new Repeat(new Sequence(new Place(new PointF(60, 60)), a1), 3);
+			RepeatForever action2 = new RepeatForever(new Sequence(a1.Clone() as FiniteTimeAction, a1.Reverse() as FiniteTimeAction));
+			
+			_grossini.RunAction(action1);
+			_tamara.RunAction(action2);
+		}
+
+		public override object Clone() {
+			return new SpriteRepeat();
+		}
+
+		public override string ToString() {
+			return "Repeat / RepeatForever actions";
+		}
+	}
+
+	public class SpriteReverseSequence : SpriteDemo {
+		public override void OnEnter() {
+			base.OnEnter();
+			_tamara.Visible = false;
+			
+			MoveBy move1 = new MoveBy(1, new PointF(250, 0));
+			MoveBy move2 = new MoveBy(1, new PointF(0, 50));
+			Sequence seq = Sequence.Construct(move1, move2, move1.Reverse() as FiniteTimeAction);
+			Sequence action = Sequence.Construct(seq, seq.Reverse() as FiniteTimeAction);
+			
+			_grossini.RunAction(action);
+		}
+
+		public override object Clone() {
+			return new SpriteReverseSequence();
+		}
+
+		public override string ToString() {
+			return "Reverse a sequence";
+		}
+		
+	}
+
+	public class SpriteReverseSequence2 : SpriteDemo {
+		public override void OnEnter() {
+			base.OnEnter();
+			MoveBy move1 = new MoveBy(1, new PointF(250, 0));
+			MoveBy move2 = new MoveBy(1, new PointF(0, 50));
+			ToggleVisibility tog1 = new ToggleVisibility();
+			ToggleVisibility tog2 = new ToggleVisibility();
+			Sequence seq = Sequence.Construct(move1, tog1, move2, tog2, move1.Reverse() as FiniteTimeAction);
+			Repeat action = new Repeat(Sequence.Construct(seq, seq.Reverse() as FiniteTimeAction), 3);
+			
+			_grossini.RunAction(action);
+			
+			MoveBy move_tamara = new MoveBy(1, new PointF(100, 0));
+			MoveBy move_tamara2 = new MoveBy(1, new PointF(50, 0));
+			Hide hide = new Hide();
+			Sequence seq_tamara = Sequence.Construct(move_tamara, hide, move_tamara2);
+			Sequence seq_back = seq_tamara.Reverse() as Sequence;
+			_tamara.RunAction(Sequence.Construct(seq_tamara, seq_back));
+		}
+
+		public override object Clone() {
+			return new SpriteReverseSequence2();
+		}
+
+		public override string ToString() {
+			return "Reverse sequence 2";
+		}
+	}
+
+	public class SpriteOrbit : SpriteDemo {
+		public override void OnEnter() {
+			base.OnEnter();
+			
+			CenterSprites();
+			
+			OrbitCamera orbit1 = new OrbitCamera(2, 1, 0, 0, 180, 0, 0);
+			Sequence action1 = Sequence.Construct(orbit1, orbit1.Reverse() as FiniteTimeAction);
+			
+			OrbitCamera orbit2 = new OrbitCamera(2, 1, 0, 0, 180, -45, 0);
+			Sequence action2 = Sequence.Construct(orbit2, orbit2.Reverse() as FiniteTimeAction);
+			
+			_grossini.RunAction(orbit1);
+			_tamara.RunAction(orbit2);
+		}
+
+		public override object Clone() {
+			return new SpriteOrbit();
+		}
+
+		public override string ToString() {
+			return "OrbitCamera action";
 		}
 	}
 }

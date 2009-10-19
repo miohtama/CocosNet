@@ -16,6 +16,7 @@ namespace CocosNet.Menus {
 		
 		public MenuItem() {
 			IsEnabled = true;
+			AnchorPoint = new PointF(0.5f, 0.5f);
 		}
 		
 		public RectangleF Rect {

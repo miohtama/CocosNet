@@ -91,5 +91,6 @@
     <Content Include="powered.png" />
     <Content Include="fps_images.png" />
     <Content Include="tiles.png" />
+    <Content Include="grossinis_sister2.png" />
   </ItemGroup>
 </Project>

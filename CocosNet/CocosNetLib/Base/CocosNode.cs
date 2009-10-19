@@ -16,6 +16,7 @@ namespace CocosNet.Base {
 	public class CocosNode {
 		public const int CocosNodeTagInvalid = -1;
 
+		private Color _color = Colors.White;
 		private int _zorder;
 		private Camera _camera;
 		private PointF _transformAnchor;
@@ -33,6 +34,24 @@ namespace CocosNet.Base {
 
 		private List<CocosNode> _children;
 
+		public Color Color {
+			get {
+				return _color;
+			}
+			set {
+				_color = value;
+			}
+		}
+		
+		public byte Opacity {
+			get {
+				return _color.A;
+			}
+			set {
+				_color.A = value;
+			}
+		}
+		
 		public IList<CocosNode> Children {
 			get { return _children; }
 		}
@@ -95,14 +114,6 @@ namespace CocosNet.Base {
 			}
 		}
 
-		public PointF Position {
-			get { return _position; }
-			set {
-				_position = value;
-				_isTransformDirty = _isInverseDirty = true;
-			}
-		}
-
 		public PointF TransformAnchor {
 			get { return _transformAnchor; }
 			set {
@@ -143,7 +154,6 @@ namespace CocosNet.Base {
 			IsRunning = false;
 			Rotation = 0;
 			ScaleX = ScaleY = 1;
-			Position = PointF.Empty;
 			TransformAnchor = PointF.Empty;
 			AnchorPoint = PointF.Empty;
 			ContentSize = SizeF.Empty;
@@ -157,6 +167,7 @@ namespace CocosNet.Base {
 			_camera = null;
 			_children = new List<CocosNode>(4);
 			UserData = null;
+			_position = PointF.Empty;
 		}
 
 		public void CleanUp() {
@@ -193,11 +204,36 @@ namespace CocosNet.Base {
 			return this;
 		}
 
+		/// <summary>
+		/// Changing an object's position is done so often
+		/// it's probably cheaper to set it existing PointF
+		/// object than to constantly create new ones
+		/// </summary>
 		public void SetPosition(float x, float y) {
 			_position.X = x;
 			_position.Y = y;
+			
+			_isTransformDirty = _isInverseDirty = true;
+		}
+		
+		public void SetPosition(PointF point) {
+			_position = point;
+			_isTransformDirty = _isInverseDirty = true;
 		}
 
+		public void MoveBy(float dx, float dy) {
+			_position.X = _position.X + dx;
+			_position.Y = _position.Y + dy;
+			
+			_isTransformDirty = _isInverseDirty = true;
+		}
+		
+		public PointF Position {
+			get {
+				return _position;
+			}
+		}
+		
 		private void InsertChild(CocosNode child, int z) {
 			int i = 0;
 			bool added = false;

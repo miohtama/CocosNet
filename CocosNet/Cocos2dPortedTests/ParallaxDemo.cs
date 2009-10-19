@@ -20,7 +20,7 @@ namespace Cocos2dPortedTests {
 
             Label label = new Label(ToString(), "Arial", 32);
             AddChild(label, 1);
-            label.Position = new PointF(s.Width / 2, s.Height - 50);
+            label.SetPosition(s.Width / 2, s.Height - 50);
 
 		
 			MenuItemImage item1 = new MenuItemImage("b1.png", "b2.png");
@@ -34,10 +34,10 @@ namespace Cocos2dPortedTests {
 
             Menu menu = new Menu(item1, item2, item3);
 
-            menu.Position = PointF.Empty;
-            item1.Position = new PointF(s.Width / 2 - 100, 30);
-            item2.Position = new PointF(s.Width / 2, 30);
-            item3.Position = new PointF(s.Width / 2 + 100, 30);
+            menu.SetPosition(PointF.Empty);
+            item1.SetPosition(s.Width / 2 - 100, 30);
+            item2.SetPosition(s.Width / 2, 30);
+            item3.SetPosition(s.Width / 2 + 100, 30);
 
             AddChild(menu, 1);
         }

@@ -30,6 +30,10 @@ namespace CocosNet.Support {
 		public All WrapT { get; set; }
 	}
 
+	/// <summary>
+	/// This is the same Texture2D class that Apple
+	/// shipped as sample code early on.
+	/// </summary>
 	public class Texture2D : IDisposable {
 		public const int MaxTextureSize = 1024;
 		private uint _name;
@@ -73,7 +77,7 @@ namespace CocosNet.Support {
 			SetTexParameters(texParams);
 		}
 
-		private void InitWithData(IntPtr data, Texture2DPixelFormat pixelFormat, int pixelsWide, int pixelsHigh, SizeF contentSize) {
+		private void InitWithData(byte[] data, Texture2DPixelFormat pixelFormat, int pixelsWide, int pixelsHigh, SizeF contentSize) {
 			GL.GenTextures(1, ref _name);
 			GL.BindTexture(All.Texture2D, _name);
 			
@@ -147,11 +151,12 @@ namespace CocosNet.Support {
 						UIGraphics.PushContext(context);
 						text.DrawInRect(new RectangleF(0, 0, dim.Width, dim.Height), font, UILineBreakMode.WordWrap, alignment);
 						UIGraphics.PopContext();
-						InitWithData((IntPtr)dataPb, Texture2DPixelFormat.A8, width, height, dim);
 					}
 				}
 			}
 			colorSpace.Dispose();
+			
+			InitWithData(data, Texture2DPixelFormat.A8, width, height, dim);
 		}
 
 		public Texture2D(UIImage uiImage) {
@@ -210,11 +215,10 @@ namespace CocosNet.Support {
 			byte[] data;
 			
 			unsafe {
-				
 				// all formats require w*h*4, except A8 requires just w*h
 				int dataSize = width * height * 4;
 				if (pixelFormat == Texture2DPixelFormat.A8) {
-					dataSize /= 4;
+					dataSize = width * height;
 				}
 				
 				data = new byte[dataSize];
@@ -244,6 +248,7 @@ namespace CocosNet.Support {
 					context.ClearRect(new RectangleF(0, 0, width, height));
 					context.TranslateCTM(0, height - image.Height);
 					
+					// why is this here? make an identity transform, then immediately not use it? Need to look into this
 					CGAffineTransform transform = CGAffineTransform.MakeIdentity();
 					
 					if (!transform.IsIdentity) {
@@ -251,13 +256,9 @@ namespace CocosNet.Support {
 					}
 					
 					context.DrawImage(new RectangleF(0, 0, image.Width, image.Height), image);
-					
-					
-					
-					// Repack the pixel data into the right format
-					
 				}
 			}
+			
 			if (pixelFormat == Texture2DPixelFormat.RGB565) {
 				//Convert "RRRRRRRRGGGGGGGGBBBBBBBBAAAAAAAA" to "RRRRRGGGGGGBBBBB"
 				byte[] tempData = new byte[height * width * 2];
@@ -275,16 +276,11 @@ namespace CocosNet.Support {
 						}
 					}
 				}
-				
-				
 				data = tempData;
-
-			
 				
 			} else if (pixelFormat == Texture2DPixelFormat.RGBA4444) {
 				//Convert "RRRRRRRRGGGGGGGGBBBBBBBBAAAAAAAA" to "RRRRGGGGBBBBAAAA"
 				byte[] tempData = new byte[height * width * 2];
-				
 				
 				unsafe {
 					fixed (byte* inPixel32b = data) {
@@ -298,13 +294,11 @@ namespace CocosNet.Support {
 						}
 					}
 				}
-				
-				
 				data = tempData;
+				
 			} else if (pixelFormat == Texture2DPixelFormat.RGB5A1) {
 				//Convert "RRRRRRRRGGGGGGGGBBBBBBBBAAAAAAAA" to "RRRRRGGGGGBBBBBA"
 				byte[] tempData = new byte[height * width * 2];
-				
 				
 				unsafe {
 					fixed (byte* inPixel32b = data) {
@@ -318,20 +312,13 @@ namespace CocosNet.Support {
 						}
 					}
 				}
-				
-				
 				data = tempData;
+				
 			}
 			
-			
-			unsafe {
-				fixed (byte* dp = data) {
-					InitWithData((IntPtr)dp, pixelFormat, width, height, new SizeF(image.Width, image.Height));
-				}
-			}
-			
+			InitWithData(data, pixelFormat, width, height, new SizeF(image.Width, image.Height));
+	
 			HasPremultipliedAlpha = info == CGImageAlphaInfo.PremultipliedLast || info == CGImageAlphaInfo.PremultipliedFirst;
-			
 			
 			context.Dispose();
 		}

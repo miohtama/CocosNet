@@ -74,7 +74,7 @@ namespace CocosNet.Menus {
 				s.Height -= r.Height;
 			}
 			
-			Position = new PointF(s.Width / 2f, s.Height / 2f);
+			SetPosition(s.Width / 2f, s.Height / 2f);
 			
 			int z = 0;
 			
@@ -108,7 +108,7 @@ namespace CocosNet.Menus {
 			float y = height / 2f;
 			
 			foreach (MenuItem item in Children) {
-				item.Position = new PointF(0, y - item.ContentSize.Height * item.ScaleY / 2f);
+				item.SetPosition(0, y - item.ContentSize.Height * item.ScaleY / 2f);
 				y -= item.ContentSize.Height * item.ScaleY * padding;
 			}
 		}
@@ -126,7 +126,7 @@ namespace CocosNet.Menus {
 			float x = -width / 2f;
 			
 			foreach (MenuItem item in Children) {
-				item.Position = new PointF(x + item.ContentSize.Width * item.ScaleX / 2f, 0);
+				item.SetPosition(x + item.ContentSize.Width * item.ScaleX / 2f, 0);
 				x += item.ContentSize.Width * item.ScaleX + padding;
 			}
 		}

@@ -66,7 +66,7 @@ namespace CocosNet.Support {
 			if (DispatchEvents) {
 				List<TouchHandler> handlers = new List<TouchHandler>(_touchHandlers);
 				// Make full-aot aware of the needed ICollection<UITouch> types
-				ICollection<UITouch> touches_col = (ICollection <UITouch>) touchSet.ToArray<UITouch>();
+				ICollection<UITouch> touches_col = (ICollection<UITouch>)touchSet.ToArray<UITouch>();
 				int touches_count = touches_col.Count;
 				List<UITouch> touches = new List<UITouch>(touches_col);
 				

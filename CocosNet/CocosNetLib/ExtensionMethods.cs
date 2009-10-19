@@ -21,6 +21,9 @@ namespace CocosNet {
 			if (list == null) {
 				throw new ArgumentNullException("list");
 			}
+			if (action == null) {
+				throw new ArgumentNullException("action");
+			}
 			
 			foreach (T t in list) {
 				action(t);

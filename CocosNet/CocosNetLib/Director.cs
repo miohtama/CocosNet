@@ -86,8 +86,7 @@ namespace CocosNet {
 				_frames = 0;
 				_accumDt = 0;
 				
-				_fpsLabel.Text = string.Format("{0:0.00}4444444444444", _frameRate);
-				_fpsLabel.Position = new PointF(50, 50);
+				_fpsLabel.Text = string.Format("{0:0.00}", _frameRate);
 			}
 		
 			_fpsLabel.Draw();
@@ -131,7 +130,7 @@ namespace CocosNet {
 			GL.ClearColor(0, 0, 0, 1);
 			
 			if (_fpsLabel == null) {
-				_fpsLabel = new LabelAtlas("00.0", "fps_images.png", 16, 24, '.');
+				_fpsLabel = new LabelAtlas("000.00", "fps_images.png", 16, 24, '.');
 			}
 		}
 
@@ -497,7 +496,7 @@ namespace CocosNet {
 
 		private void StartAnimation() {
 			Debug.Assert(_animationTimer == null, "_animationTimer must be null. Calling StartAnimation twice?");
-			_animationTimer = NSTimer.CreateRepeatingTimer(new TimeSpan(0, 0, 0, 0, Convert.ToInt32(AnimationInterval * 1000)), MainLoop);
+			_animationTimer = NSTimer.CreateRepeatingTimer(new TimeSpan(0, 0, 0, 0, Convert.ToInt32(AnimationInterval * 1000) - 1), MainLoop);
 			NSRunLoop.Main.AddTimer(_animationTimer, "NSDefaultRunLoopMode");
 		}
 

@@ -15,10 +15,10 @@ namespace CocosNet {
 	public class TextureAtlas {
 		#region AtlasList
 		/// <summary>
-		/// This class offers the inteface of a standard List.
+		/// This class offers the interface of a standard List.
 		/// But lets you directly access the backing array.
 		/// It is used by the TextureAtlas to efficiently send the quads
-		/// and indices over to OpenGL without having to directly much with an array.
+		/// and indices over to OpenGL without having to directly muck with an array.
 		/// </summary>
 		private class AtlasList<T> : IList<T> {
 			private T[] _data;
@@ -36,58 +36,12 @@ namespace CocosNet {
 				_index = -1;
 			}
 
-			System.Collections.IEnumerator IEnumerable.GetEnumerator() {
-				throw new System.NotImplementedException();
-			}
-
-			public IEnumerator<T> GetEnumerator() {
-				throw new System.NotImplementedException();
-			}
-
-			public void Add(T item) {
-				++_index;
-				if (_index >= _data.Length) {
-					DoubleArray();
-				}
-				_data[_index] = item;
-				_index++;
-			}
-
-			public void Clear() {
-				_data = new T[0];
-				_index = -1;
-			}
-
-			public bool Contains(T item) {
-				throw new System.NotImplementedException();
-			}
-
-			public void CopyTo(T[] array, int arrayIndex) {
-				throw new System.NotImplementedException();
-			}
-
-			public bool Remove(T item) {
-				throw new System.NotImplementedException();
-			}
-
 			public int Count {
 				get { return _index + 1; }
 			}
 
 			public bool IsReadOnly {
 				get { return false; }
-			}
-
-			public int IndexOf(T item) {
-				throw new System.NotImplementedException();
-			}
-
-			public void Insert(int index, T item) {
-				throw new System.NotImplementedException();
-			}
-
-			public void RemoveAt(int index) {
-				throw new System.NotImplementedException();
 			}
 
 			public T this[int index] {
@@ -103,6 +57,53 @@ namespace CocosNet {
 			public T[] Data {
 				get { return _data; }
 			}
+			
+			public void Add(T item) {
+				++_index;
+				if (_index >= _data.Length) {
+					DoubleArray();
+				}
+				_data[_index] = item;
+			}
+			
+			#region Not implemented members of IList<T>
+			System.Collections.IEnumerator IEnumerable.GetEnumerator() {
+				throw new System.NotImplementedException();
+			}
+
+			public IEnumerator<T> GetEnumerator() {
+				throw new System.NotImplementedException();
+			}
+
+			public bool Contains(T item) {
+				throw new System.NotImplementedException();
+			}
+
+			public void CopyTo(T[] array, int arrayIndex) {
+				throw new System.NotImplementedException();
+			}
+
+			public bool Remove(T item) {
+				throw new System.NotImplementedException();
+			}
+
+			public int IndexOf(T item) {
+				throw new System.NotImplementedException();
+			}
+
+			public void Insert(int index, T item) {
+				throw new System.NotImplementedException();
+			}
+
+			public void RemoveAt(int index) {
+				throw new System.NotImplementedException();
+			}
+
+			public void Clear() {
+				throw new System.NotImplementedException();
+			}
+			#endregion
+			
 		}
 		#endregion AtlasList
 
@@ -174,13 +175,12 @@ namespace CocosNet {
 					// for these offsets.
 					const int VertexOffset = 0;
 					const int PointSize = 24;
-					
-					//GL.VertexPointer(3, All.Float, PointSize, (IntPtr)(quadP + VertexOffset));
-					GL.VertexPointer(3, All.Float, PointSize, quads);
-					
 					const int ColorOffset = 12;
+					const int TexCoordOffset = 16;
 					
-					GL.ColorPointer(4, All.UnsignedByte, PointSize, (IntPtr)(quadP + ColorOffset));
+					GL.VertexPointer(3, All.Float, PointSize, quads);
+					GL.ColorPointer(4, All.UnsignedByte, PointSize, (IntPtr)((int)quadP + ColorOffset));
+					GL.TexCoordPointer(2, All.Float, PointSize, (IntPtr)((int)quadP + TexCoordOffset));
 					
 #if USE_TRIANGLE_STRIP
 					GL.DrawElements(All.TriangleStrip, number * 6, All.UnsignedShort, _indices.Data);

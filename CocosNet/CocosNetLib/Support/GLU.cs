@@ -19,8 +19,7 @@ namespace CocosNet.Support {
 			GL.Frustum(xmin, xmax, ymin, ymax, zNear, zFar);
 		}
 
-
-		public static void LookAt(float eyex, float eyey, float eyez, float centerx, float centery, float centerz, float upx, float upy, float upz) {
+		public static void LookAt(float eyex, float eyey, float eyez, float centerx, float centery, float centerz, float upx, float upy, float upz) {	
 			float[] m = new float[16];
 			float[] x = new float[3];
 			float[] y = new float[3];

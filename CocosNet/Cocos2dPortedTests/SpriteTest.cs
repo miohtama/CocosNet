@@ -18,7 +18,7 @@ namespace Cocos2dPortedTests {
 	public abstract class SpriteDemo : Layer, ICloneable {
 		private static int _sceneIndex = 0;
 
-		private static readonly SpriteDemo[] Transitions = {
+		private static readonly ICloneable[] Transitions = {
 			new SpriteManual(),
 			new SpriteMove(),
 			new SpriteRotate(),
@@ -34,7 +34,7 @@ namespace Cocos2dPortedTests {
 			new SpriteReverse(),
 			new SpriteDelayTime(),
 			new SpriteRepeat(),
-//			new SpriteCallFunc(),
+			new SpriteCallFunc(),
 			new SpriteReverseSequence(),
 			new SpriteReverseSequence2(),
 			new SpriteOrbit()
@@ -175,13 +175,13 @@ namespace Cocos2dPortedTests {
 			
 			CenterSprites();
 			
-			var actionTo = new RotateTo(2, 45);
-			var actionTo2 = new RotateTo(2, -45);
-			var actionTo0 = new RotateTo(2, 0);
+			RotateTo actionTo = new RotateTo(2, 45);
+			RotateTo actionTo2 = new RotateTo(2, -45);
+			RotateTo actionTo0 = new RotateTo(2, 0);
 			_tamara.RunAction(new Sequence(actionTo, actionTo0));
 			
-			var actionBy = new RotateBy(2, 360);
-			var actionByBack = actionBy.Reverse() as RotateBy;
+			RotateBy actionBy = new RotateBy(2, 360);
+			RotateBy actionByBack = actionBy.Reverse() as RotateBy;
 			_grossini.RunAction(new Sequence(actionBy, actionByBack));
 			
 			
@@ -467,6 +467,58 @@ namespace Cocos2dPortedTests {
 		}
 	}
 
+	public class SpriteCallFunc : SpriteDemo {
+		public override void OnEnter() {
+			base.OnEnter();
+			
+			SizeF s = Director.Instance.WinSize;
+			Sprite sprite = new Sprite("grossinis_sister2.png");
+			AddChild(sprite);
+			sprite.SetPosition(s.Width - 100, s.Height / 2);
+			
+			Sequence action = Sequence.Construct(new MoveBy(2, new PointF(200, 0)), new CallFunc(Callback1));
+			Sequence action2 = Sequence.Construct(new ScaleBy(2, 2), new FadeOut(2), new CallFuncN(Callback2));
+			Sequence action3 = Sequence.Construct(new RotateBy(3, 360), new FadeOut(2), new CallFuncND(Callback3, 0xbebabebau));
+			
+			_grossini.RunAction(action);
+			_tamara.RunAction(action2);
+			sprite.RunAction(action3);
+		}
+
+		private void Callback1() {
+			Console.WriteLine("callback 1 called");
+			SizeF s = Director.Instance.WinSize;
+			Label label = new Label("callback 1 called", "Marker Felt", 16);
+			label.SetPosition(s.Width / 4 * 1, s.Height / 2);
+			AddChild(label);
+		}
+
+		private void Callback2(CocosNode sender) {
+			Console.WriteLine("callback 2 called from: " + sender.ToString());
+			SizeF s = Director.Instance.WinSize;
+			Label label = new Label("callback 2 called", "Marker Felt", 16);
+			label.SetPosition(s.Width / 4 * 2, s.Height / 2);
+			AddChild(label);
+		}
+
+		private void Callback3(CocosNode sender, object data) {
+			Console.WriteLine("callback 3 called from:{0} with data:{1}", sender, data);
+			SizeF s = Director.Instance.WinSize;
+			Label label = new Label("callback 3 called", "Marker Felt", 16);
+			label.SetPosition(s.Width / 4 * 3, s.Height / 2);
+			AddChild(label);
+		}
+
+		public override object Clone() {
+			return new SpriteCallFunc();
+		}
+
+		public override string ToString() {
+			return "Callbacks: CallFunc and friends";
+		}
+		
+	}
+
 	public class SpriteReverseSequence : SpriteDemo {
 		public override void OnEnter() {
 			base.OnEnter();
@@ -531,8 +583,8 @@ namespace Cocos2dPortedTests {
 			OrbitCamera orbit2 = new OrbitCamera(2, 1, 0, 0, 180, -45, 0);
 			Sequence action2 = Sequence.Construct(orbit2, orbit2.Reverse() as FiniteTimeAction);
 			
-			_grossini.RunAction(orbit1);
-			_tamara.RunAction(orbit2);
+			_grossini.RunAction(action1);
+			_tamara.RunAction(action2);
 		}
 
 		public override object Clone() {

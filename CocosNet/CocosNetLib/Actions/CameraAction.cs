@@ -95,10 +95,10 @@ namespace CocosNet.Actions {
 				_radius = r;
 			}
 			if (float.IsNaN(_angleZ)) {
-				_angleZ = zenith.ToRadians();
+				_angleZ = zenith.ToDegrees();
 			}
 			if (float.IsNaN(_angleX)) {
-				_angleX = azimuth.ToRadians();
+				_angleX = azimuth.ToDegrees();
 			}
 			
 			_radZ = _angleZ.ToRadians();

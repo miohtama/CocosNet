@@ -43,7 +43,12 @@ namespace CocosNet.Actions {
 		public virtual void Update(float t) {
 		}
 
-		public abstract Action Reverse();
+		/// <summary>
+		/// Actions that are reversable should override this.
+		/// </summary>
+		public virtual Action Reverse() {
+			throw new InvalidOperationException("Can't reverse a " + ToString());
+		}
 	}
 
 	public abstract class FiniteTimeAction : Action {
@@ -117,11 +122,7 @@ namespace CocosNet.Actions {
 		public override object Clone() {
 			return new Place(_position);
 		}
-
-		public override Action Reverse() {
-			throw new NotImplementedException("Can't reverse a Place");
-		}
-
+		
 		public override void Start() {
 			Target.SetPosition(_position.X, _position.Y);
 		}
@@ -187,10 +188,6 @@ namespace CocosNet.Actions {
 
 		public override object Clone() {
 			return new Repeat(_other.Clone() as FiniteTimeAction, _times);
-		}
-
-		public override Action Reverse() {
-			throw new NotImplementedException("Can't reverse a Repeat");
 		}
 
 		public override void Start() {
@@ -535,10 +532,6 @@ namespace CocosNet.Actions {
 			return new RotateTo(Duration, _originalAngle);
 		}
 
-		public override Action Reverse() {
-			throw new NotImplementedException("RotateTo can't be reversed");
-		}
-
 		public override void Start() {
 			base.Start();
 			
@@ -565,7 +558,6 @@ namespace CocosNet.Actions {
 	}
 
 	public class RotateBy : IntervalAction {
-		private float _originalAngle;
 		private float _angle;
 		private float _startAngle;
 
@@ -574,11 +566,11 @@ namespace CocosNet.Actions {
 		}
 
 		public override object Clone() {
-			return new RotateBy(Duration, _originalAngle);
+			return new RotateBy(Duration, _angle);
 		}
 
 		public override Action Reverse() {
-			return new RotateBy(Duration, -_originalAngle);
+			return new RotateBy(Duration, -_angle);
 		}
 
 		public override void Start() {
@@ -626,11 +618,6 @@ namespace CocosNet.Actions {
 			Target.ScaleX = _startScaleX + (_deltaX * t);
 			Target.ScaleY = _startScaleY + (_deltaY * t);
 		}
-
-		public override Action Reverse() {
-			throw new NotImplementedException("Cannot reverse a ScaleTo");
-		}
-		
 	}
 
 	public class ScaleBy : ScaleTo {
@@ -824,12 +811,7 @@ namespace CocosNet.Actions {
 			byte b = Convert.ToByte(_from.B + (_to.B - _from.B) * t);
 			
 			(Target as TextureNode).SetRgb(r, g, b);
-		}
-
-		public override Action Reverse() {
-			throw new NotImplementedException("TintTo can't be reversed");
-		}
-		
+		}	
 	}
 
 	public class TintBy : IntervalAction {

@@ -94,6 +94,7 @@
     <Compile Include="Support\Util.cs" />
     <Compile Include="Actions\BezierConfig.cs" />
     <Compile Include="Actions\CameraAction.cs" />
+    <Compile Include="Actions\CallFunc.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base\" />
@@ -107,8 +108,6 @@
     <Folder Include="Actions\" />
     <Folder Include="Effects\" />
     <Folder Include="Support\" />
-    <Folder Include="Resources\" />
-    <Folder Include="Resources\Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

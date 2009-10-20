@@ -50,7 +50,7 @@ namespace CocosNet {
 		public void Locate() {
 			if (Dirty) {
 				DeviceOrientation orientation = Director.Instance.DeviceOrientation;
-				
+
 				switch (orientation) {
 					case DeviceOrientation.Portrait:
 						break;
@@ -85,6 +85,7 @@ namespace CocosNet {
 			_eyeX = x;
 			_eyeY = y;
 			_eyeZ = z;
+			Dirty = true;
 		}
 
 		public void GetEye(out float x, out float y, out float z) {
@@ -97,6 +98,7 @@ namespace CocosNet {
 			_centerX = x;
 			_centerY = y;
 			_centerZ = z;
+			Dirty = true;
 		}
 
 		public void GetCenter(out float x, out float y, out float z) {
@@ -109,6 +111,7 @@ namespace CocosNet {
 			_upX = x;
 			_upY = y;
 			_upZ = z;
+			Dirty = true;
 		}
 
 		public void GetUp(out float x, out float y, out float z) {

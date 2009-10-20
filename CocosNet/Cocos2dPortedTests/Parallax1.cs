@@ -10,9 +10,10 @@ using System.Drawing;
 using CocosNet.Actions;
 using CocosNet.Sprites;
 using CocosNet.Tiles;
+using CocosNet;
 
 namespace Cocos2dPortedTests {
-	public class Parallax1 : ParallaxDemo {
+	public class Parallax1 : ParallaxDemo, ICloneable {
 		public Parallax1() {
 			Sprite cocosImage = new Sprite("powered.png");
 			
@@ -20,8 +21,8 @@ namespace Cocos2dPortedTests {
 			cocosImage.AnchorPoint = PointF.Empty;
 			
 //			TileMapAtlas tileMap = new TileMapAtlas("tiles.png", "levelMap.tga", 16, 16);
-//			
-//			tileMap.AnchorPoint = PointF.Empty;
+			//			
+			//			tileMap.AnchorPoint = PointF.Empty;
 			
 			Sprite background = new Sprite("background.png");
 			
@@ -31,8 +32,16 @@ namespace Cocos2dPortedTests {
 			ParallaxNode voidNode = new ParallaxNode();
 			
 			voidNode.AddChild(background, -1, new PointF(0.4f, 0.5f), PointF.Empty);
-//			voidNode.AddChild(tileMap, 1, new PointF(2.2f, 1f), new PointF(0, -200));
+			//			voidNode.AddChild(tileMap, 1, new PointF(2.2f, 1f), new PointF(0, -200));
 			voidNode.AddChild(cocosImage, 2, new PointF(3f, 2.5f), new PointF(200, 800));
+			
+			Random ran = new Random();
+			for (int i = 0; i < 30; ++i) {
+				Sprite bomberman = new Sprite("grossini.png");
+				bomberman.Scale = 3f * (float)ran.NextDouble();
+				bomberman.AnchorPoint = PointF.Empty;
+				voidNode.AddChild(bomberman, 3, new PointF(4.5f, 3f), new PointF(ran.Next(0, 1000), ran.Next(-500, 1000)));
+			}
 			
 			var goUp = new MoveBy(4, new PointF(0, -500));
 			var goDown = goUp.Reverse() as MoveBy;
@@ -48,5 +57,10 @@ namespace Cocos2dPortedTests {
 		public override string ToString() {
 			return "Parallax: parent and 3 children";
 		}
+
+		public object Clone() {
+			return new Parallax1();
+		}
+		
 	}
 }

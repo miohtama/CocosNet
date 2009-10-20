@@ -17,6 +17,10 @@ namespace CocosNet {
 			return degrees * (float)Math.PI / 180.0f;
 		}
 		
+		public static float ToDegrees(this float radians) {
+			return radians * 180.0f / (float)Math.PI;
+		}
+		
 		public static void Each<T>(this List<T> list, Action<T> action) {
 			if (list == null) {
 				throw new ArgumentNullException("list");

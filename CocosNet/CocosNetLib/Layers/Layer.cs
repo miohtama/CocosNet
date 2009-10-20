@@ -30,24 +30,21 @@ namespace CocosNet.Layers {
 
 		public virtual void RegisterWithTouchDispatcher() {
 		}
-		#region TargetedTouchDelegate implementation
+		
+		public virtual bool TouchBegan(MonoTouch.UIKit.UITouch touch, MonoTouch.UIKit.UIEvent evnt) {
+			throw new System.NotImplementedException();
+		}
 
-		public bool TouchBegan(MonoTouch.UIKit.UITouch touch, MonoTouch.UIKit.UIEvent evnt) {
+		public virtual void TouchMoved(MonoTouch.UIKit.UITouch touch, MonoTouch.UIKit.UIEvent evnt) {
 			throw new System.NotImplementedException();
 		}
-
-		public void TouchMoved(MonoTouch.UIKit.UITouch touch, MonoTouch.UIKit.UIEvent evnt) {
-			throw new System.NotImplementedException();
-		}
-		public void TouchEnded(MonoTouch.UIKit.UITouch touch, MonoTouch.UIKit.UIEvent evnt) {
-			throw new System.NotImplementedException();
-		}
-		public void TouchCancelled(MonoTouch.UIKit.UITouch touch, MonoTouch.UIKit.UIEvent evnt) {
-			throw new System.NotImplementedException();
-		}
-		#endregion
 		
+		public virtual void TouchEnded(MonoTouch.UIKit.UITouch touch, MonoTouch.UIKit.UIEvent evnt) {
+			throw new System.NotImplementedException();
+		}
 		
-		
+		public virtual void TouchCancelled(MonoTouch.UIKit.UITouch touch, MonoTouch.UIKit.UIEvent evnt) {
+			throw new System.NotImplementedException();
+		}
 	}
 }

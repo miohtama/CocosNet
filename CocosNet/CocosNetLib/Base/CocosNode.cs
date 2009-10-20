@@ -175,6 +175,8 @@ namespace CocosNet.Base {
 				throw new ArgumentException("Child already has a parent", "child");
 			}
 			
+			child.Tag = tag;
+			
 			InsertChild(child, z);
 			child.Parent = this;
 			

@@ -59,9 +59,10 @@
       <DependentUpon>MainWindow.xib</DependentUpon>
     </Compile>
     <Compile Include="Main.cs" />
-    <Compile Include="ParallaxDemo.cs" />
-    <Compile Include="Parallax1.cs" />
+    <Compile Include="ParallaxTest.cs" />
     <Compile Include="SpriteTest.cs" />
+    <Compile Include="ParticleTest.cs" />
+    <Compile Include="TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainWindow.xib" />

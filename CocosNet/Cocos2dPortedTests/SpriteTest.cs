@@ -15,10 +15,8 @@ using Color = CocosNet.Base.Color;
 using Action = CocosNet.Actions.Action;
 
 namespace Cocos2dPortedTests {
-	public abstract class SpriteDemo : Layer, ICloneable {
-		private static int _sceneIndex = 0;
-
-		private static readonly ICloneable[] Transitions = {
+	public abstract class SpriteDemo : TestBase {
+		private static readonly SpriteDemo[] MyScenes = {
 			new SpriteManual(),
 			new SpriteMove(),
 			new SpriteRotate(),
@@ -40,24 +38,10 @@ namespace Cocos2dPortedTests {
 			new SpriteOrbit()
 		};
 
-		private static CocosNode NextAction() {
-			++_sceneIndex;
-			_sceneIndex = _sceneIndex % Transitions.Length;
-			return Transitions[_sceneIndex].Clone() as CocosNode;
+		protected override ICloneable[] Scenes {
+			get { return MyScenes; }
 		}
 
-		private static CocosNode BackAction() {
-			--_sceneIndex;
-			if (_sceneIndex < 0) {
-				_sceneIndex = Transitions.Length - 1;
-			}
-			
-			return Transitions[_sceneIndex].Clone() as CocosNode;
-		}
-
-		private static CocosNode RestartAction() {
-			return Transitions[_sceneIndex].Clone() as CocosNode;
-		}
 
 		protected Sprite _grossini;
 		protected Sprite _tamara;
@@ -73,51 +57,13 @@ namespace Cocos2dPortedTests {
 			_grossini = new Sprite("grossini.png");
 			_tamara = new Sprite("grossinis_sister1.png");
 			
-			AddChild(_grossini);
-			AddChild(_tamara);
+			AddChild(_grossini, 1);
+			AddChild(_tamara, 2);
 			
 			SizeF s = Director.Instance.WinSize;
 			
 			_grossini.SetPosition(60, s.Height / 3);
 			_tamara.SetPosition(60, 2 * s.Height / 3);
-			
-			Label label = new Label(ToString(), "Arial", 32);
-			AddChild(label);
-			
-			label.SetPosition(s.Width / 2f, s.Height - 50);
-			
-			MenuItemImage item1 = new MenuItemImage("b1.png", "b2.png");
-			item1.Click += OnBack;
-			
-			MenuItemImage item2 = new MenuItemImage("r1.png", "r2.png");
-			item2.Click += OnRestart;
-			
-			MenuItemImage item3 = new MenuItemImage("f1.png", "f2.png");
-			item3.Click += OnForward;
-			
-			Menu menu = new Menu(item1, item2, item3);
-			
-			menu.SetPosition(PointF.Empty);
-			item1.SetPosition(480 / 2 - 100, 30);
-			item2.SetPosition(480 / 2, 30);
-			item3.SetPosition(480 / 2 + 100, 30);
-			
-			AddChild(menu, 1);
-		}
-
-		public abstract object Clone();
-
-
-		private void OnBack(object sender, EventArgs e) {
-			Director.Instance.ReplaceScene(new Scene(BackAction()));
-		}
-
-		private void OnForward(object sender, EventArgs e) {
-			Director.Instance.ReplaceScene(new Scene(NextAction()));
-		}
-
-		private void OnRestart(object sender, EventArgs e) {
-			Director.Instance.ReplaceScene(new Scene(RestartAction()));
 		}
 	}
 

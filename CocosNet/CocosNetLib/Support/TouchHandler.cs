@@ -42,9 +42,9 @@ namespace CocosNet.Support {
 					_claimedTouches.Remove(touch);
 				}
 				
-				if (SwallowsTouches) {
-					touches.Remove(touch);
-				}
+//				if (SwallowsTouches) {
+//					touches.Remove(touch);
+//				}
 			}
 		}
 		
@@ -83,10 +83,9 @@ namespace CocosNet.Support {
 				
 				if (touchWasClaimed) {
 					_claimedTouches.Add(touch);
-				}
-				
-				if (SwallowsTouches) {
-					touches.Remove(touch);
+					if (SwallowsTouches) {
+						touches.Remove(touch);
+					}
 				}
 			}
 			

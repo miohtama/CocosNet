@@ -18,10 +18,10 @@ namespace CocosNet.Actions {
 		public BezierConfig Negate() {
 			BezierConfig ret = new BezierConfig();
 			
-			ret.StartPosition = Util.Negate(StartPosition);
-			ret.EndPosition = Util.Negate(EndPosition);
-			ret.ControlPoint1 = Util.Negate(ControlPoint1);
-			ret.ControlPoint2 = Util.Negate(ControlPoint2);
+			ret.StartPosition = StartPosition.Negate();
+			ret.EndPosition = EndPosition.Negate();
+			ret.ControlPoint1 = ControlPoint1.Negate();
+			ret.ControlPoint2 = ControlPoint2.Negate();
 			
 			return ret;
 		}

@@ -13,6 +13,27 @@ using System.Collections;
 
 namespace CocosNet {
 	public static class ExtensionMethods {
+		#region PointF extensions
+		
+		public static PointF Negate(this PointF p) {
+			return new PointF(-p.X, -p.Y);
+		}
+		
+		public static PointF Subtract(this PointF p, PointF other) {
+			p.X -= other.X;
+			p.Y -= other.Y;
+			return p;
+		}
+		
+		public static PointF Add(this PointF p, PointF other) {
+			p.X += other.X;
+			p.Y += other.Y;
+			return p;
+		}		
+	
+		#endregion
+		
+		
 		public static float ToRadians(this float degrees) {
 			return degrees * (float)Math.PI / 180.0f;
 		}

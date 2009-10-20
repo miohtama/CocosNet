@@ -19,10 +19,4 @@ namespace CocosNet {
 			Console.WriteLine(msg);
 		}
 	}
-	
-	internal static class Util {
-		public static PointF Negate(PointF p) {
-			return new PointF(-p.X, -p.Y);
-		}
-	}
 }

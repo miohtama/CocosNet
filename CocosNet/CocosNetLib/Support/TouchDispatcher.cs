@@ -65,6 +65,11 @@ namespace CocosNet.Support {
 		public void TouchesBegan(NSSet touchSet, UIEvent evnt) {
 			if (DispatchEvents) {
 				List<TouchHandler> handlers = new List<TouchHandler>(_touchHandlers);
+				
+				foreach (TouchHandler handler in handlers) {
+					Console.WriteLine("handler: " + handler.Delegate);
+				}
+				
 				// Make full-aot aware of the needed ICollection<UITouch> types
 				ICollection<UITouch> touches_col = (ICollection<UITouch>)touchSet.ToArray<UITouch>();
 				int touches_count = touches_col.Count;

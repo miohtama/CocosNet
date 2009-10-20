@@ -137,7 +137,7 @@ namespace CocosNet.Menus {
 			TouchDispatcher.Instance.AddTargetedDelegate(this, int.MinValue + 1, true);
 		}
 
-		public bool TouchBegan(UITouch touch, UIEvent evnt) {
+		public override bool TouchBegan(UITouch touch, UIEvent evnt) {
 			if (_state != MenuState.Waiting) {
 				return false;
 			}
@@ -154,7 +154,7 @@ namespace CocosNet.Menus {
 			return false;
 		}
 
-		public void TouchMoved(UITouch touch, UIEvent evnt) {
+		public override void TouchMoved(UITouch touch, UIEvent evnt) {
 			Debug.Assert(_state == MenuState.TrackingTouch, "Menu.TouchEnded, invalid state");
 			
 			MenuItem currentItem = ItemForTouch(touch);
@@ -169,7 +169,7 @@ namespace CocosNet.Menus {
 			}
 		}
 
-		public void TouchEnded(UITouch touch, UIEvent evnt) {
+		public override void TouchEnded(UITouch touch, UIEvent evnt) {
 			Debug.Assert(_state == MenuState.TrackingTouch, "Menu.TouchEnded, invalid state");
 			
 			if (_selectedItem != null) {
@@ -180,7 +180,7 @@ namespace CocosNet.Menus {
 			_state = MenuState.Waiting;
 		}
 
-		public void TouchCancelled(UITouch touch, UIEvent evnt) {
+		public override void TouchCancelled(UITouch touch, UIEvent evnt) {
 			Debug.Assert(_state == MenuState.TrackingTouch, "Menu.TouchCancelled, invalid state");
 			
 			if (_selectedItem != null) {

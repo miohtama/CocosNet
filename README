@@ -1,10 +1,10 @@
-CocosNet README 10/17/2009
+CocosNet README, last updated: 10/20/2009
 ========
 matt.e.greer@gmail.com 
 http://github.com/city41/CocosNet
 #monotouch on irc.gnome.org
 
-This is a very new project, started about a week ago. It is a port of Cocos2D for iPhone to MonoTouch.
+This is a new project, started early October 2009. It is a port of Cocos2D for iPhone to MonoTouch.
 Which is in turn a port of Cocos2D for Python to the iPhone. The short term goal of this project is to
 have a full fledged version of Cocos running in the MonoTouch environment.
 
@@ -17,12 +17,42 @@ Please see the LICENSE file for licensing information
 
 TO RUN
 ======
-- Compile CocosNetLib and Cocos2DPortedTests (You can just open the root .sln file in MonoDevelop and hit Cmnd-b)
-- Launch in the simulator, one of the ported tests should start.
-- Go into Main.cs in Cocos2DPortedTests and change the instantiated Scene to change the test. It's commented like this
+- Compile CocosNetLib and CocosNetTests (You can just open the root .sln file in MonoDevelop and hit Cmnd-b)
+- Launch in the simulator or on a device, one of the ported tests should start.
+- Go into Main.cs in CocosNetTests and change the instantiated Scene to change the test. It's commented like this
 
 			// To run a different test, instantiate a different class here
 			// SpriteTest -- SpriteManual
 			// ParallaxTest -- Parallax1
 			Scene scene = new Scene(new SpriteManual());
+
+
+
+PORTED THUS FAR
+==========
+The following generally works well in CocosNet
+
+The main infrastructure
+- Director
+- CocosNode, TextureNode, AtlasNode
+- Layer, Scene
+- TextureMgr
+- Label,
+- Camera
+- etc
+
+Atlases
+- TextureAtlas and LayerAtlas
+
+Menus
+- Menu
+- MenuItemImage
+
+Actions
+- most sprite oriented actions implemented
+- see SpriteTest.cs and the Actions namespace
+
+Parallax
+- ParallaxNode
+- see ParallaxTest.cs
 

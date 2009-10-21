@@ -9,9 +9,8 @@
     <ProjectTypeGuids>{E613F3A2-FE9C-494F-B74E-F63BCB86FEA6};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
     <MainNibFile>MainWindow.xib</MainNibFile>
-    <AssemblyName>Cocos2dPortedTests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <RootNamespace>Cocos2dPortedTests</RootNamespace>
+    <RootNamespace>CocosNetTests</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +20,7 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AssemblyName>CocosNetTests</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -28,6 +28,7 @@
     <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AssemblyName>CocosNetTests</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +39,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
+    <AssemblyName>Cocos2dPortedTests</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -46,6 +48,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
+    <AssemblyName>Cocos2dPortedTests</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -59,10 +62,9 @@
       <DependentUpon>MainWindow.xib</DependentUpon>
     </Compile>
     <Compile Include="Main.cs" />
-    <Compile Include="ParallaxTest.cs" />
-    <Compile Include="SpriteTest.cs" />
-    <Compile Include="ParticleTest.cs" />
     <Compile Include="TestBase.cs" />
+    <Compile Include="Tests\ParallaxTest.cs" />
+    <Compile Include="Tests\SpriteTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainWindow.xib" />
@@ -80,18 +82,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="grossini.png" />
-    <Content Include="grossinis_sister1.png" />
-    <Content Include="background.png" />
-    <Content Include="b1.png" />
-    <Content Include="b2.png" />
-    <Content Include="f1.png" />
-    <Content Include="f2.png" />
-    <Content Include="r1.png" />
-    <Content Include="r2.png" />
-    <Content Include="powered.png" />
-    <Content Include="fps_images.png" />
-    <Content Include="tiles.png" />
-    <Content Include="grossinis_sister2.png" />
+    <Content Include="Images\b1.png" />
+    <Content Include="Images\b2.png" />
+    <Content Include="Images\background.png" />
+    <Content Include="Images\f1.png" />
+    <Content Include="Images\f2.png" />
+    <Content Include="Images\grossini.png" />
+    <Content Include="Images\grossinis_sister1.png" />
+    <Content Include="Images\grossinis_sister2.png" />
+    <Content Include="Images\powered.png" />
+    <Content Include="Images\r1.png" />
+    <Content Include="Images\r2.png" />
+    <Content Include="Images\tiles.png" />
+    <Content Include="Images\fps_images.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
+    <Folder Include="Tests\" />
   </ItemGroup>
 </Project>

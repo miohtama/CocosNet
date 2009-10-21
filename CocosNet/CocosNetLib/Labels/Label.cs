@@ -14,7 +14,6 @@ using CocosNet.Support;
 namespace CocosNet.Labels {
     public class Label : TextureNode {
 		private SizeF _dimensions;
-		private UITextAlignment _alignment;
 		private string _fontName;
 		private float _fontSize;
 		
@@ -30,7 +29,7 @@ namespace CocosNet.Labels {
 			if (_dimensions.IsEmpty) {
 				Texture = new Texture2D(text, _fontName, _fontSize);
 			} else {
-				Texture = new Texture2D(text, _dimensions, _alignment, _fontName, _fontSize);	
+				Texture = new Texture2D(text, _dimensions, UITextAlignment.Center, _fontName, _fontSize);	
 			}
 		}
     }

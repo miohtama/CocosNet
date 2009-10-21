@@ -11,7 +11,24 @@ using System.Collections;
 
 namespace CocosNet {
 
-
+	// TODO:
+	// this could use a (much) better design.
+	// In Cocos2D, users of the TextureAtlas have to be
+	// aware of their "capacity" at all times and maintain this value.
+	// This is what determines how many indices get made. I would prefer to avoid that 
+	// here. So far the way I negated that is quite a hack, and
+	// has some unexpected pitfalls in it. Instead, a better
+	// approach is to have one entity aware of both the quad
+	// and indices arrays (perhaps TextureAtlas itself), and 
+	// makes sure both stay in sync.
+	//
+	// the current way the atlas works, indices are only created
+	// at construction time. So you have to never need more
+	// indices than after you first creat it. So, for example, with
+	// the FPS display (which is a label atlas), it has to be initialized
+	// with a string that is long enough to handle all FPS cases, otherwise
+	// any cases that are longer will require more indices than are there,
+	// and you get nasty graphic glitching.
 	public class TextureAtlas {
 		#region AtlasList
 		/// <summary>
@@ -173,7 +190,6 @@ namespace CocosNet {
 				fixed (GLPointQuad3F* quadP = quads) {
 					// TODO: should come up with a non hardcoded method
 					// for these offsets.
-					const int VertexOffset = 0;
 					const int PointSize = 24;
 					const int ColorOffset = 12;
 					const int TexCoordOffset = 16;

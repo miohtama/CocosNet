@@ -21,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>0618</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -91,10 +92,10 @@
     <Compile Include="Support\IEAGLTouchDelegate.cs" />
     <Compile Include="TextureAtlas.cs" />
     <Compile Include="Base\Types.cs" />
-    <Compile Include="Support\Util.cs" />
     <Compile Include="Actions\BezierConfig.cs" />
     <Compile Include="Actions\CameraAction.cs" />
     <Compile Include="Actions\CallFunc.cs" />
+    <Compile Include="Layers\ColorLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base\" />

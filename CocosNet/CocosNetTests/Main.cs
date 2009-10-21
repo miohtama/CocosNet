@@ -19,6 +19,10 @@ namespace Cocos2dPortedTests {
 		}
 
 		public override void FinishedLaunching(UIApplication app) {
+			// all images are found in the Images directory,
+			// so all images can now be loaded by just their name, not "Images\foo.png"
+			TextureMgr.Instance.ImageRoot = "Images";
+			
 			window.BackgroundColor = UIColor.Black;
 			
 			window.UserInteractionEnabled = true;
@@ -36,7 +40,7 @@ namespace Cocos2dPortedTests {
 			// To run a different test, instantiate a different class here
 			// SpriteTest -- SpriteManual
 			// ParallaxTest -- Parallax1
-			Scene scene = new Scene(new Parallax1());
+			Scene scene = new Scene(new SpriteTest());
 			
 			Director.Instance.RunScene(scene);
 		}

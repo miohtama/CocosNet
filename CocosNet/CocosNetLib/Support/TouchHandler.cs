@@ -25,7 +25,6 @@ namespace CocosNet.Support {
 	
 	public class TargetedTouchHandler : TouchHandler {
 		private ITargetedTouchDelegate _delegate;
-		private int _priority;
 		private List<UITouch> _claimedTouches;
 		
 		private delegate void TouchDelegateMethod(UITouch touch, UIEvent evnt);

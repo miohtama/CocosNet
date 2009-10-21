@@ -7,15 +7,35 @@ using System.Drawing;
 using OpenTK.Graphics.ES11;
 using System.Runtime.InteropServices;
 
+//
+// The types in this file are types that get sent over to OpenGL via 
+// methods like GL.VertexPointer, GL.ColorPointer, etc. 
+// So it is important that they are defined in a manner that makes finding
+// the fields via pointers and offsets possible. So all types in here
+// use simple fields instead of properties, and explicit layout
+//
+// These types in CocosNet have very different naming than their Cocos2D counterparts.
+// In Cocos2D they are defined in ccTypes.h, with names like _ccV2F_C4F_T2F_Quad.
+//
+// An example of usage of these types can be found in TextureAtlas.Draw()
+//
+
 namespace CocosNet.Base {
 	public class Colors {
 		static Colors() {
 			Color w = new Color();
 			w.R = w.G = w.B = w.A = 255;
 			White = w;
+			
+			Color black = new Color();
+			black.R = black.G = black.B = 0;
+			black.A = 255;
+			Black = black;
 		}
 		
+		public static readonly Color Black;
 		public static readonly Color White;
+		
 	
 		public static Color New(byte r, byte g, byte b, byte a) {
 			Color c = new Color();
@@ -119,7 +139,16 @@ namespace CocosNet.Base {
 		[FieldOffset(72)] public GLPoint3F BR;
 	}
 
+	// Types throughout Cocos, such as CocosNode, have a BlendFunc
+	// object that defines how they are blended when rendered. It's
+	// a simple coupling of source and destination blending values.
+	// It doesn't quite act like the other types in this file, but Cocos2D
+	// defines ccBlendFunc in ccTypes.h, so I placed it here too.
 	public struct BlendFunc {
+		public const All DefaultBlendSrc = All.One;
+		public const All DefaultBlendDst = All.OneMinusSrcAlpha;
+		public static readonly BlendFunc DefaultBlendFunc = new BlendFunc(DefaultBlendSrc, DefaultBlendDst);
+		
 		public All Src;
 		public All Dst;
 
@@ -127,78 +156,11 @@ namespace CocosNet.Base {
 			Src = src;
 			Dst = dst;
 		}
+		
+		public bool IsDefault {
+			get {
+				return Src == DefaultBlendSrc && Dst == DefaultBlendDst;
+			}
+		}
 	}		
-	
-//	internal static class QuadHelper {
-//		public static void SetGLPointQuad3F_TL_TexCoords_U(ref GLPointQuad3F quad, float value) {
-//			Tex2F t = quad.TL.TexCoords;
-//			t.U = value;
-//			quad.TL.TexCoords = t;
-//			quad.TL.TexCoords.U = 34;
-//		}
-//		
-//		public static void SetGLPointQuad3F_TL_TexCoords_V(ref GLPointQuad3F quad, float value) {
-//			
-//		}
-//		
-//		public static void SetGLPointQuad3F_TR_TexCoords_U(ref GLPointQuad3F quad, float value) {
-//			
-//		}
-//		
-//		public static void SetGLPointQuad3F_TR_TexCoords_V(ref GLPointQuad3F quad, float value) {
-//			
-//		}
-//		
-//		public static void SetGLPointQuad3F_BL_TexCoords_U(ref GLPointQuad3F quad, float value) {
-//			
-//		}
-//		
-//		public static void SetGLPointQuad3F_BL_TexCoords_V(ref GLPointQuad3F quad, float value) {
-//			
-//		}
-//		
-//		public static void SetGLPointQuad3F_BR_TexCoords_U(ref GLPointQuad3F quad, float value) {
-//			
-//		}
-//		
-//		public static void SetGLPointQuad3F_BR_TexCoords_V(ref GLPointQuad3F quad, float value) {
-//			
-//		}		
-//		
-//		public static void SetGLPointQuad3F_TL_Vertex_X(ref GLPointQuad3F quad, float value) {
-//		}
-//		
-//		public static void SetGLPointQuad3F_TL_Vertex_Y(ref GLPointQuad3F quad, float value) {
-//		}
-//		
-//		public static void SetGLPointQuad3F_TL_Vertex_Z(ref GLPointQuad3F quad, float value) {
-//		}		
-//		
-//		public static void SetGLPointQuad3F_TR_Vertex_X(ref GLPointQuad3F quad, float value) {
-//		}
-//		
-//		public static void SetGLPointQuad3F_TR_Vertex_Y(ref GLPointQuad3F quad, float value) {
-//		}
-//		
-//		public static void SetGLPointQuad3F_TR_Vertex_Z(ref GLPointQuad3F quad, float value) {
-//		}		
-//		
-//		public static void SetGLPointQuad3F_BL_Vertex_X(ref GLPointQuad3F quad, float value) {
-//		}
-//		
-//		public static void SetGLPointQuad3F_BL_Vertex_Y(ref GLPointQuad3F quad, float value) {
-//		}
-//		
-//		public static void SetGLPointQuad3F_BL_Vertex_Z(ref GLPointQuad3F quad, float value) {
-//		}				
-//		
-//		public static void SetGLPointQuad3F_BR_Vertex_X(ref GLPointQuad3F quad, float value) {
-//		}
-//		
-//		public static void SetGLPointQuad3F_BR_Vertex_Y(ref GLPointQuad3F quad, float value) {
-//		}
-//		
-//		public static void SetGLPointQuad3F_BR_Vertex_Z(ref GLPointQuad3F quad, float value) {
-//		}			
-//	}
 }

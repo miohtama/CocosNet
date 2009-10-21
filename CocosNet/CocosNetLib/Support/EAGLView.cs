@@ -17,7 +17,6 @@ namespace CocosNet.Support {
 
 	[Register]
 	public class EAGLView : UIView {
-		All _format;
 		All _depthFormat;
 		bool _autoResize;
 		iPhoneOSGraphicsContext _context;
@@ -50,7 +49,6 @@ namespace CocosNet.Support {
 				EAGLDrawableProperty.RetainedBacking,
 				EAGLDrawableProperty.ColorFormat
 			});
-			_format = format;
 			_depthFormat = depth;
 			
 			_context = (iPhoneOSGraphicsContext)((IGraphicsContextInternal)GraphicsContext.CurrentContext).Implementation;

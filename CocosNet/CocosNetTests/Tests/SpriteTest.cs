@@ -77,9 +77,8 @@ namespace Cocos2dPortedTests {
 			_tamara.Opacity = 128;
 			
 			_grossini.Rotation = 120;
-			_grossini.Opacity = 128;
 			_grossini.SetPosition(240, 160);
-			_grossini.Color = Colors.New(255, 0, 0, 255);
+			_grossini.Color = Colors.New(255, 0, 0, 128);
 		}
 
 		public override object Clone() {
@@ -436,7 +435,7 @@ namespace Cocos2dPortedTests {
 			SizeF s = Director.Instance.WinSize;
 			Label label = new Label("callback 1 called", "Marker Felt", 16);
 			label.SetPosition(s.Width / 4 * 1, s.Height / 2);
-			AddChild(label);
+			AddChild(label, 4);
 		}
 
 		private void Callback2(CocosNode sender) {
@@ -444,7 +443,7 @@ namespace Cocos2dPortedTests {
 			SizeF s = Director.Instance.WinSize;
 			Label label = new Label("callback 2 called", "Marker Felt", 16);
 			label.SetPosition(s.Width / 4 * 2, s.Height / 2);
-			AddChild(label);
+			AddChild(label, 4);
 		}
 
 		private void Callback3(CocosNode sender, object data) {
@@ -452,7 +451,7 @@ namespace Cocos2dPortedTests {
 			SizeF s = Director.Instance.WinSize;
 			Label label = new Label("callback 3 called", "Marker Felt", 16);
 			label.SetPosition(s.Width / 4 * 3, s.Height / 2);
-			AddChild(label);
+			AddChild(label, 4);
 		}
 
 		public override object Clone() {

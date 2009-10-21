@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using MonoTouch.UIKit;
 using CocosNet.Support;
+using System.IO;
 
 namespace CocosNet {
 
@@ -31,6 +32,8 @@ namespace CocosNet {
 			_cache = new Dictionary<string, Texture2D>();
 		}
 		
+		public string ImageRoot { get; set; }
+		
 		public void RemoveAllTextures() {
 			_cache.Clear();
 		}
@@ -39,6 +42,8 @@ namespace CocosNet {
 			if (fileName == null) {
 				throw new ArgumentNullException("fileName");
 			}
+			
+			fileName = Path.Combine(ImageRoot ?? string.Empty, fileName);
 			
 			Texture2D tex = null;
 			

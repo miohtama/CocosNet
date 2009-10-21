@@ -18,6 +18,7 @@ using System.Threading;
 using CocosNet.Labels;
 using CocosNet.Layers;
 using CocosNet.Support;
+using CocosNet.Base;
 
 namespace CocosNet {
 
@@ -95,7 +96,7 @@ namespace CocosNet {
 		private void SetAlphaBlending(bool @on) {
 			if (@on) {
 				GL.Enable(All.Blend);
-				GL.BlendFunc(All.BlendSrc, All.BlendDst);
+				GL.BlendFunc(BlendFunc.DefaultBlendSrc, BlendFunc.DefaultBlendDst);
 			} else {
 				GL.Disable(All.Blend);
 			}

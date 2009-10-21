@@ -9,6 +9,7 @@ using System.Text;
 using System.Drawing;
 using CocosNet.Base;
 using Color = CocosNet.Base.Color;
+using CocosNet.Sprites;
 
 namespace CocosNet.Actions {
 	public abstract class Action : ICloneable {
@@ -122,7 +123,7 @@ namespace CocosNet.Actions {
 		public override object Clone() {
 			return new Place(_position);
 		}
-		
+
 		public override void Start() {
 			Target.SetPosition(_position.X, _position.Y);
 		}
@@ -379,8 +380,7 @@ namespace CocosNet.Actions {
 		private FiniteTimeAction _first;
 		private FiniteTimeAction _second;
 
-		public Spawn(FiniteTimeAction first, FiniteTimeAction second) 
-				: base((first == null || second == null) ? 0 : Math.Max(first.Duration, second.Duration)) {
+		public Spawn(FiniteTimeAction first, FiniteTimeAction second) : base((first == null || second == null) ? 0 : Math.Max(first.Duration, second.Duration)) {
 			
 			if (first == null) {
 				throw new ArgumentNullException("first");
@@ -420,7 +420,7 @@ namespace CocosNet.Actions {
 			return new Spawn(_first.Reverse() as FiniteTimeAction, _second.Reverse() as FiniteTimeAction);
 		}
 	}
-	
+
 	public class ReverseTime : IntervalAction {
 		private FiniteTimeAction _action;
 
@@ -454,7 +454,7 @@ namespace CocosNet.Actions {
 			return _action.Clone() as Action;
 		}
 	}
-	
+
 	public class MoveTo : IntervalAction {
 		protected PointF _endPosition;
 		protected PointF _startPosition;
@@ -755,7 +755,8 @@ namespace CocosNet.Actions {
 		}
 
 		public override void Update(float t) {
-			(Target as TextureNode).Opacity = (byte)(255 * t);
+			TextureNode tn = (TextureNode)Target;
+			tn.Opacity = (byte)(255 * t);
 		}
 
 		public override Action Reverse() {
@@ -775,7 +776,8 @@ namespace CocosNet.Actions {
 			// FadeIn and FadeOut have to have TextureNodes as their Targets.
 			// Still trying to decide how to work with some of Cocos2D's weak typing,
 			// in Cocos2D they are just ids.
-			(Target as TextureNode).Opacity = (byte)(255 * (1f - t));
+			TextureNode tn = (TextureNode)Target;
+			tn.Opacity = (byte)(255 * (1f - t));
 		}
 
 		public override Action Reverse() {
@@ -811,7 +813,7 @@ namespace CocosNet.Actions {
 			byte b = Convert.ToByte(_from.B + (_to.B - _from.B) * t);
 			
 			(Target as TextureNode).SetRgb(r, g, b);
-		}	
+		}
 	}
 
 	public class TintBy : IntervalAction {

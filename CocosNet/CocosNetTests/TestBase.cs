@@ -8,7 +8,7 @@ using CocosNet.Menus;
 using System.Drawing;
 
 namespace Cocos2dPortedTests {
-	public abstract class TestBase : Layer, ICloneable {
+	public abstract class TestBase : ColorLayer, ICloneable {
 		private static int _index = 0;
 		
 		private void OnBack(object sender, EventArgs e) {

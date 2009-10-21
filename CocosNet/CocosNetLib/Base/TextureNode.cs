@@ -32,7 +32,7 @@ namespace CocosNet.Base {
 		public TextureNode() {
 			Color = Colors.White;
 			AnchorPoint = new PointF(0.5f, 0.5f);
-			BlendFunc = new BlendFunc(All.BlendSrc, All.BlendDst);
+			BlendFunc = BlendFunc.DefaultBlendFunc;
 		}
 		
 		~TextureNode() {
@@ -75,7 +75,7 @@ namespace CocosNet.Base {
 			
 			bool newBlend = false;
 			
-			if (BlendFunc.Src != All.BlendSrc || BlendFunc.Dst != All.BlendDst) {
+			if (!BlendFunc.IsDefault) {
 				newBlend = true;
 				GL.BlendFunc(BlendFunc.Src, BlendFunc.Dst);
 			}
@@ -83,7 +83,7 @@ namespace CocosNet.Base {
 			Texture.DrawAtPoint(PointF.Empty);
 			
 			if (newBlend) {
-				GL.BlendFunc(All.BlendSrc, All.BlendDst);
+				GL.BlendFunc(BlendFunc.DefaultBlendSrc, BlendFunc.DefaultBlendDst);
 			}
 			
 			GL.Color4(255, 255, 255, 255);

@@ -48,7 +48,7 @@ namespace CocosNet.Base {
 			
 			Color = Colors.White;
 			
-			BlendFunc = new BlendFunc(All.BlendSrc, All.BlendDst);
+			BlendFunc = BlendFunc.DefaultBlendFunc;
 			
 			TextureAtlas = new TextureAtlas(tileFile, itemsToRender);
 			

@@ -74,7 +74,7 @@ namespace CocosNet.Labels {
 			GL.Color4(Color.R, Color.G, Color.B, Color.A);
 			
 			bool newBlend = false;
-			if (BlendFunc.Src != All.BlendSrc || BlendFunc.Dst != All.BlendDst) {
+			if (!BlendFunc.IsDefault) {
 				newBlend = true;
 				GL.BlendFunc(BlendFunc.Src, BlendFunc.Dst);
 			}
@@ -82,7 +82,7 @@ namespace CocosNet.Labels {
 			TextureAtlas.DrawQuads(_text.Length);
 			
 			if (newBlend) {
-				GL.BlendFunc(All.BlendSrc, All.BlendDst);
+				GL.BlendFunc(BlendFunc.DefaultBlendSrc, BlendFunc.DefaultBlendDst);
 			}
 			
 			GL.Color4(255, 255, 255, 255);

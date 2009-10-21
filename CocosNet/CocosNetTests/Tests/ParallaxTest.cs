@@ -71,7 +71,8 @@ namespace Cocos2dPortedTests {
 		}
 
 		public override string ToString() {
-			return "Parallax: parent and 3 children";
+			// 2 children, for now
+			return "Parallax: parent and 2 children";
 		}
 
 		public override object Clone() {
@@ -87,12 +88,10 @@ namespace Cocos2dPortedTests {
 		}
 
 		public override void OnEnter() {
-			Console.WriteLine("P2 OnEnter");
 			IsTouchEnabled = true;
 		}
 
 		public override void OnExit() {
-			Console.WriteLine("P2 OnExit");
 			IsTouchEnabled = false;
 		}
 

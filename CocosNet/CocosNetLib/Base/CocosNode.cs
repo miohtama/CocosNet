@@ -113,7 +113,7 @@ namespace CocosNet.Base {
 			}
 		}
 
-		public SizeF ContentSize {
+		public virtual SizeF ContentSize {
 			get { return _contentSize; }
 			set {
 				if (_contentSize != value) {

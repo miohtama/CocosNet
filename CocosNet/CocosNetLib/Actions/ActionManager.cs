@@ -11,9 +11,6 @@ namespace CocosNet.Actions {
 		private class HashElement {
 			public List<Action> Actions = new List<Action>();
 			public CocosNode Target;
-			public int ActionIndex;
-			public Action CurrentAction;
-			public bool CurrentActionSalvaged;
 		}
 		
 		private Dictionary<CocosNode, HashElement> _hash;

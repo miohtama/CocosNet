@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CocosNetLib", "CocosNetLib\CocosNetLib.csproj", "{BFBBC3E5-4ECF-4262-9658-918A097207D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cocos2dPortedTests", "Cocos2dPortedTests\Cocos2dPortedTests.csproj", "{640AC980-F0BE-4DB1-9D86-241AE37E4C27}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CocosNetTests", "CocosNetTests\CocosNetTests.csproj", "{640AC980-F0BE-4DB1-9D86-241AE37E4C27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +31,6 @@ Global
 		{BFBBC3E5-4ECF-4262-9658-918A097207D1}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Cocos2dPortedTests\Cocos2dPortedTests.csproj
+		StartupItem = CocosNetTests\CocosNetTests.csproj
 	EndGlobalSection
 EndGlobal

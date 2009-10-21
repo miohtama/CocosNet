@@ -66,13 +66,15 @@ namespace CocosNet.Support {
 			if (DispatchEvents) {
 				List<TouchHandler> handlers = new List<TouchHandler>(_touchHandlers);
 				
-				foreach (TouchHandler handler in handlers) {
-					Console.WriteLine("handler: " + handler.Delegate);
-				}
-				
 				// Make full-aot aware of the needed ICollection<UITouch> types
 				ICollection<UITouch> touches_col = (ICollection<UITouch>)touchSet.ToArray<UITouch>();
+				
+				#pragma warning disable 0219
+				// this is a tiny hack, make sure the AOT compiler knows about
+				// UICollection.Count, as it will need it when we instantiate the list below
 				int touches_count = touches_col.Count;
+				#pragma warning restore 0219
+				
 				List<UITouch> touches = new List<UITouch>(touches_col);
 				
 				foreach (TouchHandler handler in handlers) {
@@ -90,8 +92,15 @@ namespace CocosNet.Support {
 			if (DispatchEvents) {
 				List<TouchHandler> handlers = new List<TouchHandler>(_touchHandlers);
 				// Make full-aot aware of the needed ICollection<UITouch> types
-				ICollection<UITouch> touches_col = (ICollection <UITouch>) touchSet.ToArray<UITouch>();
+				ICollection<UITouch> touches_col = (ICollection<UITouch>)touchSet.ToArray<UITouch>();
+
+			
+				#pragma warning disable 0219
+				// this is a tiny hack, make sure the AOT compiler knows about
+				// UICollection.Count, as it will need it when we instantiate the list below
 				int touches_count = touches_col.Count;
+				#pragma warning restore 0219
+				
 				List<UITouch> touches = new List<UITouch>(touches_col);
 				
 				foreach (TouchHandler handler in handlers) {
@@ -109,8 +118,14 @@ namespace CocosNet.Support {
 			if (DispatchEvents) {
 				List<TouchHandler> handlers = new List<TouchHandler>(_touchHandlers);
 				// Make full-aot aware of the needed ICollection<UITouch> types
-				ICollection<UITouch> touches_col = (ICollection <UITouch>) touchSet.ToArray<UITouch>();
+				ICollection<UITouch> touches_col = (ICollection<UITouch>)touchSet.ToArray<UITouch>();
+				
+				#pragma warning disable 0219
+				// this is a tiny hack, make sure the AOT compiler knows about
+				// UICollection.Count, as it will need it when we instantiate the list below
 				int touches_count = touches_col.Count;
+				#pragma warning restore 0219
+				
 				List<UITouch> touches = new List<UITouch>(touches_col);
 				
 				foreach (TouchHandler handler in handlers) {
@@ -128,8 +143,14 @@ namespace CocosNet.Support {
 			if (DispatchEvents) {
 				List<TouchHandler> handlers = new List<TouchHandler>(_touchHandlers);
 				// Make full-aot aware of the needed ICollection<UITouch> types
-				ICollection<UITouch> touches_col = (ICollection <UITouch>) touchSet.ToArray<UITouch>();
+				ICollection<UITouch> touches_col = (ICollection<UITouch>)touchSet.ToArray<UITouch>();
+				
+				#pragma warning disable 0219
+				// this is a tiny hack, make sure the AOT compiler knows about
+				// UICollection.Count, as it will need it when we instantiate the list below
 				int touches_count = touches_col.Count;
+				#pragma warning restore 0219
+				
 				List<UITouch> touches = new List<UITouch>(touches_col);
 				
 				foreach (TouchHandler handler in handlers) {

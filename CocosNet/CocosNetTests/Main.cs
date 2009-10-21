@@ -40,7 +40,7 @@ namespace Cocos2dPortedTests {
 			// To run a different test, instantiate a different class here
 			// SpriteTest -- SpriteManual
 			// ParallaxTest -- Parallax1
-			Scene scene = new Scene(new SpriteTest());
+			Scene scene = new Scene(new SpriteManual());
 			
 			Director.Instance.RunScene(scene);
 		}

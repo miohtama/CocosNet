@@ -10,6 +10,7 @@ using MonoTouch.ObjCRuntime;
 using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Collections;
+using CocosNet.Base;
 
 namespace CocosNet {
 	public static class ExtensionMethods {
@@ -30,9 +31,38 @@ namespace CocosNet {
 			p.Y += other.Y;
 			return p;
 		}		
+		
+		public static PointF Multiply(this PointF p, float multiplier) {
+			return new PointF(p.X * multiplier, p.Y * multiplier);
+		}
+		
+		public static float Dot(this PointF p, PointF other) {
+			return p.X * other.X + p.Y * other.Y;	
+		}
+		
+		public static float Length(this PointF p) {
+			return (float)Math.Sqrt(p.Dot(p));
+		}
+		
+		public static PointF Normalize(this PointF p) {
+			return p.Multiply(1.0f / p.Length());	
+		}
+		
+		public static Vertex2F ToVertex2F(this PointF p) {
+			Vertex2F v = new Vertex2F();
+			v.X = p.X;
+			v.Y = p.Y;
+			
+			return v;
+		}
 	
 		#endregion
 		
+		#region numeric extensions
+		
+		public static bool IsOdd(this int number) {
+			return (number & 1) == 1;
+		}
 		
 		public static float ToRadians(this float degrees) {
 			return degrees * (float)Math.PI / 180.0f;
@@ -42,11 +72,16 @@ namespace CocosNet {
 			return radians * 180.0f / (float)Math.PI;
 		}
 		
+		#endregion numeric extensions
+		
+		#region list extensions
+		
 		public static void Each<T>(this List<T> list, Action<T> action) {
 			if (list == null) {
 				throw new ArgumentNullException("list");
 			}
 			if (action == null) {
+				
 				throw new ArgumentNullException("action");
 			}
 			
@@ -62,6 +97,8 @@ namespace CocosNet {
 			
 			return col.Count == 0;
 		}
+		
+		#endregion list extension
 		
 		[DllImport(MonoTouch.Constants.ObjectiveCLibrary, EntryPoint="objc_msgSend")]
 		private static extern SizeF cgsize_objc_msgSend_IntPtr_IntPtr(IntPtr target, IntPtr selector, IntPtr font);

@@ -30,7 +30,7 @@ namespace CocosNet.Base {
 		public bool OpacityModifyRgb { get; set; }
 		
 		public TextureNode() {
-			Color = Colors.White;
+			Color = Color.White;
 			AnchorPoint = new PointF(0.5f, 0.5f);
 			BlendFunc = BlendFunc.DefaultBlendFunc;
 		}

@@ -165,7 +165,11 @@ namespace CocosNet.Support {
 		}
 
 		public void SetCurrentContext() {
-			_context.MakeCurrent(null);
+			SetCurrentContext(_context);
+		}
+		
+		public void SetCurrentContext(IGraphicsContext context) {
+			context.MakeCurrent(null);
 		}
 
 		public bool IsCurrentContext {

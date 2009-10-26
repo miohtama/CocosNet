@@ -794,7 +794,7 @@ namespace CocosNet.Actions {
 		private Color _to;
 
 		public TintTo(float duration, byte red, byte green, byte blue) : base(duration) {
-			_to = Colors.New(red, green, blue, 255);
+			_to = Color.FromRGBA(red, green, blue, 255);
 		}
 
 		public override object Clone() {

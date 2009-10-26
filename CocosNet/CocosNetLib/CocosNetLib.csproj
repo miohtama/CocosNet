@@ -96,6 +96,10 @@
     <Compile Include="Actions\CameraAction.cs" />
     <Compile Include="Actions\CallFunc.cs" />
     <Compile Include="Layers\ColorLayer.cs" />
+    <Compile Include="Particle\ParticleSystem.cs" />
+    <Compile Include="Particle\PointParticleSystem.cs" />
+    <Compile Include="Particle\ParticleExamples.cs" />
+    <Compile Include="Support\PVRTexture.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base\" />

@@ -7,7 +7,7 @@ using CocosNet.Labels;
 using CocosNet.Menus;
 using System.Drawing;
 
-namespace Cocos2dPortedTests {
+namespace CocosNetTests {
 	public abstract class TestBase : ColorLayer, ICloneable {
 		private static int _index = 0;
 		
@@ -50,7 +50,7 @@ namespace Cocos2dPortedTests {
 			SizeF s = Director.Instance.WinSize;
 			
 			Label label = new Label(ToString(), "Arial", 32);
-			AddChild(label, 1);
+			AddChild(label, 100);
 			
 			label.SetPosition(s.Width / 2f, s.Height - 50);
 			
@@ -66,11 +66,14 @@ namespace Cocos2dPortedTests {
 			Menu menu = new Menu(item1, item2, item3);
 			
 			menu.SetPosition(PointF.Empty);
-			item1.SetPosition(480 / 2 - 100, 30);
-			item2.SetPosition(480 / 2, 30);
-			item3.SetPosition(480 / 2 + 100, 30);
 			
-			AddChild(menu, 1);	
+			float windowWidth = Director.Instance.WinSize.Width;
+			
+			item1.SetPosition(windowWidth / 2 - 100, 30);
+			item2.SetPosition(windowWidth / 2, 30);
+			item3.SetPosition(windowWidth / 2 + 100, 30);
+			
+			AddChild(menu, 5000);	
 		}
 		
 		public abstract object Clone();

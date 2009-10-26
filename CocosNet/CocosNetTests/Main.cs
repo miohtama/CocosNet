@@ -9,8 +9,9 @@ using CocosNet;
 using CocosNet.Layers;
 using CocosNet.Support;
 using Color = CocosNet.Base.Color;
+using System.Drawing;
 
-namespace Cocos2dPortedTests {
+namespace CocosNetTests {
 	public partial class AppDelegate : UIApplicationDelegate {
 		static void Main(string[] args) {
 			using (var c = Utilities.CreateGraphicsContext(EAGLRenderingAPI.OpenGLES1)) {
@@ -36,11 +37,11 @@ namespace Cocos2dPortedTests {
 			Director.Instance.AttachInView(window);
 			
 			window.MakeKeyAndVisible();
-
+			
 			// To run a different test, instantiate a different class here
 			// SpriteTest -- SpriteManual
 			// ParallaxTest -- Parallax1
-			Scene scene = new Scene(new SpriteManual());
+			Scene scene = new Scene(new DemoFirework());
 			
 			Director.Instance.RunScene(scene);
 		}

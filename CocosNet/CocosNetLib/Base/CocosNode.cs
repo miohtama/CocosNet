@@ -411,14 +411,6 @@ namespace CocosNet.Base {
 			ActionManager.Instance.RemoveAction(action);
 		}
 
-		private void ActivateTimers() {
-			throw new NotImplementedException();
-		}
-
-		private void DeactivateTimers() {
-			throw new NotImplementedException();
-		}
-
 		#region Transform
 		private CGAffineTransform NodeToParentTransform() {
 			if (_isTransformDirty) {
@@ -459,6 +451,17 @@ namespace CocosNet.Base {
 			return WorldToNodeTransform().TransformPoint(worldPoint);
 		}
 		
-		#endregion Transform
+		public PointF ConvertToWorldSpace(PointF nodePoint) {
+			return NodeToWorldTransform().TransformPoint(nodePoint);
+		}
+		
+		#endregion
+		
+		#region Timers
+		
+		
+		
+		
+		#endregion
 	}
 }

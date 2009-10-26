@@ -1,0 +1,11 @@
+*.exe
+*.pdb
+*.diff
+.DS_Store
+.svn
+*.log
+*.a
+*.o
+*.pidb
+*/bin/*
+*.userprefs

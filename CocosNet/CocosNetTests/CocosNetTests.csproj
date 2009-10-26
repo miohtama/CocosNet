@@ -65,6 +65,7 @@
     <Compile Include="TestBase.cs" />
     <Compile Include="Tests\ParallaxTest.cs" />
     <Compile Include="Tests\SpriteTest.cs" />
+    <Compile Include="Tests\ParticleTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainWindow.xib" />
@@ -95,6 +96,11 @@
     <Content Include="Images\r2.png" />
     <Content Include="Images\tiles.png" />
     <Content Include="Images\fps_images.png" />
+    <Content Include="Images\background3.png" />
+    <Content Include="Images\fire.png" />
+    <Content Include="Images\stars.png" />
+    <Content Include="Images\fire.pvr" />
+    <Content Include="Images\snow.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />

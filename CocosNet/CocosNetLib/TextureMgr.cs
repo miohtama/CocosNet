@@ -51,12 +51,18 @@ namespace CocosNet {
 				if (_cache.ContainsKey(fileName)) {
 					tex = _cache[fileName];
 				} else {
+					if (Path.GetExtension(fileName).ToLower() == ".pvr") {
+						tex = new Texture2D(fileName);
+					} else {
+					
 					UIImage image = UIImage.FromFile(fileName);
-					if (image == null) {
-						throw new ArgumentException("Could not find image: " + fileName);
-					}
+						if (image == null) {
+							throw new ArgumentException("Could not find image: " + fileName);
+						}
 					
 					tex = new Texture2D(image);
+					}
+					
 					_cache.Add(fileName, tex);
 				}
 			}

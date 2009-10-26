@@ -22,7 +22,7 @@ namespace CocosNet.Layers {
 			}
 		}
 		
-		public ColorLayer() : this(Colors.Black) {
+		public ColorLayer() : this(Color.Black) {
 		}
 		
 		public ColorLayer(Color color) : this(color, Director.Instance.WinSize) {

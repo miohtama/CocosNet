@@ -46,7 +46,7 @@ namespace CocosNet.Base {
 			_itemWidth = itemWidth;
 			_itemHeight = itemHeight;
 			
-			Color = Colors.White;
+			Color = Color.White;
 			
 			BlendFunc = BlendFunc.DefaultBlendFunc;
 			

@@ -14,7 +14,7 @@ using CocosNet.Actions;
 using Color = CocosNet.Base.Color;
 using Action = CocosNet.Actions.Action;
 
-namespace Cocos2dPortedTests {
+namespace CocosNetTests {
 	public abstract class SpriteDemo : TestBase {
 		private static readonly SpriteDemo[] MyScenes = {
 			new SpriteManual(),
@@ -78,7 +78,7 @@ namespace Cocos2dPortedTests {
 			
 			_grossini.Rotation = 120;
 			_grossini.SetPosition(240, 160);
-			_grossini.Color = Colors.New(255, 0, 0, 128);
+			_grossini.Color = Color.FromRGBA(255, 0, 0, 128);
 		}
 
 		public override object Clone() {

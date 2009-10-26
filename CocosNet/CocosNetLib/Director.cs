@@ -19,6 +19,7 @@ using CocosNet.Labels;
 using CocosNet.Layers;
 using CocosNet.Support;
 using CocosNet.Base;
+using MonoTouch.CoreGraphics;
 
 namespace CocosNet {
 
@@ -179,14 +180,17 @@ namespace CocosNet {
 				}
 				
 				GL.PopMatrix();
-				
+
 				OpenGLView.SwapBuffers();
-				
 			} catch (Exception e) {
 				Console.WriteLine("EXCEPTION: " + e.ToString());
 			}
 		}
-
+		
+		private void OnSave(UIImage image, NSError error) {
+			Console.WriteLine("SAVED");
+		}
+		
 		private bool IsOpenGLAttached {
 			get { return OpenGLView != null && OpenGLView.Superview != null; }
 		}
@@ -494,43 +498,13 @@ namespace CocosNet {
 			IsPaused = false;
 			_dt = 0;
 		}
-
-		/// <summary>
-		/// This class is to enable us to create an NSTimer with sub millisecond precision.
-		/// This allows our timer to run at exactly 60fps. TimeSpan is MonoTouch's
-		/// means of creating timers, and TimeSpan's best precision is a millisecond. So
-		/// With a TimeSpan, the framerate would end up being either 58 or 62, depending
-		/// on if you round up or down
-		/// </summary>
-		/// <remarks>
-		/// NSActionDispatcher is an internal MonoTouch class, this class mimics it
-		/// </remarks>
-		private class MyNSActionDispatcher : NSObject {
-			private const string SelectorName = "doAction";
-			private NSAction _action;
-			
-			public MyNSActionDispatcher(NSAction action) {
-				if (action == null) {
-					throw new ArgumentNullException("action");
-				}
-				_action = action;
-			}
-			
-			[Export(SelectorName)]
-			public void DoAction() {
-				_action();
-			}
-			
-			public static Selector Selector {
-				get {
-					return new Selector(SelectorName);
-				}
-			}
-		}
-		
+	
 		private void StartAnimation() {
 			Debug.Assert(_animationTimer == null, "_animationTimer must be null. Calling StartAnimation twice?");
-			_animationTimer = NSTimer.CreateTimer(AnimationInterval, new MyNSActionDispatcher(MainLoop), MyNSActionDispatcher.Selector, null, true);
+
+			// creating a TimeSpan with ticks. 10 million ticks per second.
+			_animationTimer = NSTimer.CreateRepeatingTimer(TimeSpan.FromTicks(Convert.ToInt64(AnimationInterval * 10000000L)), MainLoop);
+			
 			NSRunLoop.Main.AddTimer(_animationTimer, "NSDefaultRunLoopMode");
 		}
 

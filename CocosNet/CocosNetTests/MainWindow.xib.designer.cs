@@ -1,5 +1,5 @@
 
-namespace Cocos2dPortedTests {
+namespace CocosNetTests {
 	// Base type probably should be MonoTouch.Foundation.NSObject or subclass
 	[MonoTouch.Foundation.Register("AppDelegate")]
 	public partial class AppDelegate {

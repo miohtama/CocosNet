@@ -50,15 +50,13 @@ namespace CocosNet.Support {
 			set { _name = value; }
 		}
 
-		#region IDisposable implementation
 		public void Dispose() {
 			if (Name != 0) {
 				GL.DeleteTextures(1, ref _name);
 			}
 			GC.SuppressFinalize(this);
 		}
-		#endregion
-
+		
 		private void SetTexParameters(TexParams texParams) {
 			GL.BindTexture(All.Texture2D, _name);
 			GL.TexParameter(All.Texture2D, All.TextureMinFilter, (int)texParams.MinFilter);
@@ -317,10 +315,24 @@ namespace CocosNet.Support {
 			}
 			
 			InitWithData(data, pixelFormat, width, height, new SizeF(image.Width, image.Height));
-	
+			
 			HasPremultipliedAlpha = info == CGImageAlphaInfo.PremultipliedLast || info == CGImageAlphaInfo.PremultipliedFirst;
 			
 			context.Dispose();
+		}
+		
+		public Texture2D(string pvrFile) {
+			PVRTexture pvr = new PVRTexture(pvrFile);
+			pvr.RetainName = true;
+			
+			Name = pvr.Name;
+			MaxS = 1.0f;
+			MaxT = 1.0f;
+			PixelsWide = (int)pvr.Width;
+			PixelsHigh = (int)pvr.Height;
+			this.ContentSize = new SizeF(pvr.Width, pvr.Height);
+			
+			SetAntiAliasTexParameters();
 		}
 
 		~Texture2D() {

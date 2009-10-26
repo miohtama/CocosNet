@@ -17,7 +17,7 @@ using CocosNet.Actions;
 using CocosNet.Support;
 using CocosNet.Base;
 
-namespace Cocos2dPortedTests {
+namespace CocosNetTests {
 	public abstract class ParallaxDemo : TestBase {
 		private static readonly ParallaxDemo[] MyScenes = {
 			new Parallax1(),

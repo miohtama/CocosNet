@@ -20,9 +20,13 @@ using System.Runtime.InteropServices;
 // An example of usage of these types can be found in TextureAtlas.Draw()
 //
 
-namespace CocosNet.Base {
-	public class Colors {
-		static Colors() {
+namespace CocosNet.Base {	
+	[StructLayout(LayoutKind.Explicit)]
+	public struct Color {
+		// 4 bytes
+		public const int SizeOf = 1 * 4;
+
+		static Color() {
 			Color w = new Color();
 			w.R = w.G = w.B = w.A = 255;
 			White = w;
@@ -36,103 +40,155 @@ namespace CocosNet.Base {
 		public static readonly Color Black;
 		public static readonly Color White;
 		
-	
-		public static Color New(byte r, byte g, byte b, byte a) {
+		public static Color FromRGBA(byte r, byte g, byte b, byte a) {
 			Color c = new Color();
 			c.R = r;
 			c.G = g;
-			c.B = g;
+			c.B = b;
 			c.A = a;
 			
 			return c;
 		}
-	}
-	
-	// 4 bytes
-	[StructLayout(LayoutKind.Explicit)]
-	public struct Color {
+		
 		[FieldOffset(0)] public byte R;
 		[FieldOffset(1)] public byte G;
 		[FieldOffset(2)] public byte B;
 		[FieldOffset(3)] public byte A;
 	}
 	
-	// 8 bytes
+	[StructLayout(LayoutKind.Explicit)]
+	public struct ColorF {
+		// 16 bytes
+		public const int SizeOf = 4 * 4;
+		
+		static ColorF() {
+			ColorF w = new ColorF();
+			w.R = w.G = w.B = w.A = 1.0f;
+			White = w;
+			
+			ColorF black = new ColorF();
+			black.R = black.G = black.B = 0;
+			black.A = 1.0f;
+			Black = black;
+		}
+		
+		public static readonly ColorF Black;
+		public static readonly ColorF White;
+		
+		public static ColorF FromRGBA(float r, float g, float b, float a) {
+			ColorF c = new ColorF();
+			c.R = r;
+			c.G = g;
+			c.B = b;
+			c.A = a;
+			
+			return c;
+		}
+		
+		[FieldOffset(0)] public float R;
+		[FieldOffset(4)] public float G;
+		[FieldOffset(8)] public float B;
+		[FieldOffset(12)] public float A;
+	}
+	
 	[StructLayout(LayoutKind.Explicit)]
 	public struct Vertex2F {
+		// 8 bytes
+		public const int SizeOf = 4 * 2;
+		
 		[FieldOffset(0)] public float X;
 		[FieldOffset(4)] public float Y;		
 	}
 	
-	//  12 bytes
 	[StructLayout(LayoutKind.Explicit)]
 	public struct Vertex3F {
+		//  12 bytes
+		public const int SizeOf = 4 * 3;
+		
 		[FieldOffset(0)] public float X;
 		[FieldOffset(4)] public float Y;
 		[FieldOffset(8)] public float Z;
 	}
 	
-	// 8 bytes
 	[StructLayout(LayoutKind.Explicit)]
 	public struct Tex2F {
+		// 8 bytes
+		public const int SizeOf = 4 * 2;
+		
 		[FieldOffset(0)] public float U;
 		[FieldOffset(4)] public float V;
 	}
 	
-	// 16 bytes
 	[StructLayout(LayoutKind.Explicit)]
 	public struct PointSprite {
+		// 28 bytes
+		public const int SizeOf = Vertex2F.SizeOf + ColorF.SizeOf + 4;
+		public const int ColorOffset = 8;
+		public const int SizeOffset = 24;
+		
 		[FieldOffset(0)] public Vertex2F Position;
-		[FieldOffset(8)] public Color Color;
-		[FieldOffset(12)] public float Size;
+		[FieldOffset(ColorOffset)] public ColorF Color;
+		[FieldOffset(SizeOffset)] public float Size;
 	}
 	
-	// 32 bytes
 	[StructLayout(LayoutKind.Explicit)]
 	public struct Quad2 {
+		// 32 bytes
+		public const int SizeOf = Vertex2F.SizeOf * 4;
+		
 		[FieldOffset(0)] public Vertex2F TL;
 		[FieldOffset(8)] public Vertex2F TR;
 		[FieldOffset(16)] public Vertex2F BL;
 		[FieldOffset(24)] public Vertex2F BR;
 	}
-	
-	// 96 bytes
+
 	[StructLayout(LayoutKind.Explicit)]
 	public struct Quad3 {
+		// 96 bytes
+		public const int SizeOf = Vertex3F.SizeOf * 4;
+		
 		[FieldOffset(0)] public Vertex3F TL;
 		[FieldOffset(24)] public Vertex3F TR;
 		[FieldOffset(48)] public Vertex3F BL;
 		[FieldOffset(72)] public Vertex3F BR;	
 	}
 		
-	// 20 bytes
 	[StructLayout(LayoutKind.Explicit)]
 	public struct GLPoint2F {
+		// 20 bytes
+		public const int SizeOf = Vertex2F.SizeOf + Color.SizeOf+ Tex2F.SizeOf;
+		
 		[FieldOffset(0)] public Vertex2F Vertex;
 		[FieldOffset(8)] public Color Color;
 		[FieldOffset(12)] public Tex2F TexCoords;
 	}
 	
-	// 24 bytes
 	[StructLayout(LayoutKind.Explicit)]
 	public struct GLPoint3F {
+		// 24 bytes
+		public const int SizeOf = Vertex3F.SizeOf + Color.SizeOf + Tex2F.SizeOf;
+		
 		[FieldOffset(0)] public Vertex3F Vertex;
 		[FieldOffset(12)] public Color Color;
 		[FieldOffset(16)] public Tex2F TexCoords;
 	}
-		
-	// 80 bytes
+	
 	[StructLayout(LayoutKind.Explicit)]
 	public struct GLPointQuad2F {
+		// 80 bytes
+		public const int SizeOf = GLPoint2F.SizeOf * 4;
+		
 		[FieldOffset(0)] public GLPoint2F TL;
 		[FieldOffset(20)] public GLPoint2F TR;
 		[FieldOffset(40)] public GLPoint2F BL;
 		[FieldOffset(60)] public GLPoint2F BR;
 	}
 	
-	// 96 bytes
 	[StructLayout(LayoutKind.Explicit)]
 	public struct GLPointQuad3F {
+		// 96 bytes
+		public const int SizeOf = GLPoint3F.SizeOf * 4;
+		
 		[FieldOffset(0)] public GLPoint3F TL;
 		[FieldOffset(24)] public GLPoint3F TR;
 		[FieldOffset(48)] public GLPoint3F BL;

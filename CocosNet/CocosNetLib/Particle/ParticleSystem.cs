@@ -18,7 +18,7 @@ namespace CocosNet.Particle {
 		public const int ParticleDurationInfinity = -1;
 
 		private static Random _rand = new Random((int)DateTime.Now.Ticks);
-		
+
 		/// <summary>
 		/// Returns a random float between -1 and 1
 		/// </summary>
@@ -28,7 +28,7 @@ namespace CocosNet.Particle {
 			float randomFloat = (float)_rand.NextDouble();
 			
 			if (negative) {
-				randomFloat *= -1.0f;
+				randomFloat *= -1f;
 			}
 			
 			return randomFloat;
@@ -55,7 +55,7 @@ namespace CocosNet.Particle {
 		protected float _elapsed;
 		protected float _emitCounter;
 		protected int _particleIndex;
-		
+
 
 		public bool Active { get; private set; }
 		public int ParticleCount { get; protected set; }
@@ -138,7 +138,7 @@ namespace CocosNet.Particle {
 			particle.deltaColor.G = (end.G - start.G) / particle.life;
 			particle.deltaColor.B = (end.B - start.B) / particle.life;
 			particle.deltaColor.A = (end.A - start.A) / particle.life;
-
+			
 			// size
 			float startS = StartSize + StartSizeVar * Random11();
 			startS = Math.Max(0, startS);
@@ -194,9 +194,17 @@ namespace CocosNet.Particle {
 			PositionType = PositionType.Free;
 			
 			AutoRemoveOnFinish = false;
-			
+		}
+
+		public override void OnEnter() {
 			Scheduler.Instance.Tick += OnTick;
 		}
+
+		public override void OnExit() {
+			Scheduler.Instance.Tick -= OnTick;
+		}
+
+
 
 		public void StopSystem() {
 			Active = false;

@@ -36,13 +36,20 @@ namespace CocosNetTests {
 		protected void SetEmitterPosition() {
 			_emitter.SetPosition(200, 120);
 		}
-		
+
 		protected void CenterEmitter() {
-			_emitter.SetPosition(Director.Instance.WinSize.Width / 2, Director.Instance.WinSize.Height / 2);	
+			_emitter.SetPosition(Director.Instance.WinSize.Width / 2, Director.Instance.WinSize.Height / 2);
 		}
 
 		public override void RegisterWithTouchDispatcher() {
 			TouchDispatcher.Instance.AddTargetedDelegate(this, 0, false);
+		}
+
+		public override void OnExit() {
+			TouchDispatcher.Instance.RemoveDelegate(this);
+			if (_emitter != null) {
+				_emitter.OnExit();
+			}
 		}
 
 

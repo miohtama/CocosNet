@@ -1,4 +1,4 @@
-CocosNet README, last updated: 10/20/2009
+CocosNet README, last updated: 10/25/2009
 ========
 matt.e.greer@gmail.com 
 http://github.com/city41/CocosNet
@@ -41,6 +41,10 @@ The main infrastructure
 - Camera
 - etc
 
+Texture Related
+- Texture2D
+- PVRTexture
+
 Atlases
 - TextureAtlas and LayerAtlas
 
@@ -55,4 +59,10 @@ Actions
 Parallax
 - ParallaxNode
 - see ParallaxTest.cs
+
+Particle Systems
+- ParticleSystem base class, PointParticleSystem
+- most point examples
+- ParticleTest.cs
+
 

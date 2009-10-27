@@ -48,6 +48,24 @@ namespace CocosNet {
 			return p.Multiply(1.0f / p.Length());	
 		}
 		
+		private unsafe static float InvsSqrt(float x) {
+			float xhalf = 0.5f * x;
+			int i = *(int*)&x;
+			i = 0x5f375a86 - (i >> 1);
+			x = *(float*)&i;
+			x = x * (1.5f - xhalf * x * x);
+			
+			return x;
+		}
+		
+		public static PointF NormalizeFast(this PointF p) {
+			float inv = InvsSqrt(p.X * p.X + p.Y * p.Y);
+			p.X *= inv;
+			p.Y *= inv;
+			
+			return p;
+		}
+		
 		public static Vertex2F ToVertex2F(this PointF p) {
 			Vertex2F v = new Vertex2F();
 			v.X = p.X;

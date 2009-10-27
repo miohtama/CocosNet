@@ -195,7 +195,7 @@ namespace CocosNetTests {
 			_emitter = new ParticleSpiral();
 			AddChild(_emitter, 10);
 			
-			_emitter.Texture = TextureMgr.Instance.AddImage("fire.pvr");
+			//_emitter.Texture = TextureMgr.Instance.AddImage("fire.pvr");
 			
 			CenterEmitter();
 		}

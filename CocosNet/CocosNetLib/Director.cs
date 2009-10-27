@@ -83,7 +83,7 @@ namespace CocosNet {
 			++_frames;
 			_accumDt += _dt;
 			
-			if (_accumDt > 0.1f) {
+			if (_accumDt > 1.5f) {
 				_frameRate = _frames / _accumDt;
 				_frames = 0;
 				_accumDt = 0;

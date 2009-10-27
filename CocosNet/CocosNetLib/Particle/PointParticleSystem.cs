@@ -1,4 +1,3 @@
-
 using System;
 using OpenTK.Graphics.ES11;
 using CocosNet.Base;
@@ -42,23 +41,41 @@ namespace CocosNet.Particle {
 					PointF tangential = PointF.Empty;
 					
 					if (p.pos.X != 0 || p.pos.Y != 0) {
-						radial = p.pos.Normalize();
+						radial = p.pos.NormalizeFast();
 					}
 					
 					tangential = radial;
 					
-					radial = radial.Multiply(p.radialAccel);
+					//radial = radial.Multiply(p.radialAccel);
+					radial.X *= p.radialAccel;
+					radial.Y *= p.radialAccel;
 					
 					float newy = tangential.X;
 					tangential.X = -tangential.Y;
 					tangential.Y = newy;
-					tangential = tangential.Multiply(p.tangentialAccel);
+					//tangential = tangential.Multiply(p.tangentialAccel);
+					tangential.X *= p.tangentialAccel;
+					tangential.Y *= p.tangentialAccel;
 					
-					tmp = radial.Add(tangential).Add(Gravity);
-					tmp = tmp.Multiply(dt);
-					p.dir = p.dir.Add(tmp);
-					tmp = p.dir.Multiply(dt);
-					p.pos = p.pos.Add(tmp);
+					//tmp = radial.Add(tangential).Add(Gravity);
+					tmp.X = radial.X + tangential.X + Gravity.X;
+					tmp.Y = radial.Y + tangential.Y + Gravity.Y;
+					
+					//tmp = tmp.Multiply(dt);
+					tmp.X *= dt;
+					tmp.Y *= dt;
+					
+					//p.dir = p.dir.Add(tmp);
+					p.dir.X += tmp.X;
+					p.dir.Y += tmp.Y;
+					
+					//tmp = p.dir.Multiply(dt);
+					tmp.X = p.dir.X * dt;
+					tmp.Y = p.dir.Y * dt;
+					
+					//p.pos = p.pos.Add(tmp);
+					p.pos.X += tmp.X;
+					p.pos.Y += tmp.Y;
 					
 					p.color.R += p.deltaColor.R * dt;
 					p.color.G += p.deltaColor.G * dt;
@@ -73,8 +90,13 @@ namespace CocosNet.Particle {
 					PointF newPos = p.pos;
 					
 					if (PositionType == PositionType.Free) {
-						newPos = absolutePosition.Subtract(p.startPos);
-						newPos = p.pos.Subtract(newPos);
+						//newPos = absolutePosition.Subtract(p.startPos);
+						newPos.X = absolutePosition.X - p.startPos.X;
+						newPos.Y = absolutePosition.Y - p.startPos.Y;
+						
+						//newPos = p.pos.Subtract(newPos);
+						newPos.X = p.pos.X - newPos.X;
+						newPos.Y = p.pos.Y - newPos.Y;
 					}
 					
 					_vertices[_particleIndex].Position.X = newPos.X;
@@ -85,11 +107,9 @@ namespace CocosNet.Particle {
 					++_particleIndex;
 				} else {
 					// live < 0
-					if (_particleIndex != ParticleCount - 1) {
-						Particle tmp = _particles[_particleIndex];
-						_particles[_particleIndex] = _particles[ParticleCount - 1];
-						_particles[ParticleCount - 1] = tmp;
-					}
+					Particle tmp = _particles[_particleIndex];
+					_particles[_particleIndex] = _particles[ParticleCount - 1];
+					_particles[ParticleCount - 1] = tmp;
 					
 					ParticleCount -= 1;
 					

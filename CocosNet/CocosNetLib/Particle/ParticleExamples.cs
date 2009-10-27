@@ -289,7 +289,7 @@ namespace CocosNet.Particle {
 			
 			Texture = TextureMgr.Instance.AddImage("fire.png");
 			
-			BlendAdditive = true;
+			BlendAdditive = false;
 		}
 	}
 

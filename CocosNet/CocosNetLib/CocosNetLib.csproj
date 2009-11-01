@@ -100,6 +100,7 @@
     <Compile Include="Particle\PointParticleSystem.cs" />
     <Compile Include="Particle\ParticleExamples.cs" />
     <Compile Include="Support\PVRTexture.cs" />
+    <Compile Include="Primitives.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base\" />

@@ -8,3 +8,7 @@ see the Cocos2D AUTHORS file that ships with it. http://www.cocos2d-iphone.org/
 
 CocosNet is being ported by Matt Greer. So far with some help from people on #monotouch (irc.gnome.org)
 
+
+CocosNet contributions
+---------
+Geoff Norton (Kangaroo) -- patch to fix some phone versus sim differences

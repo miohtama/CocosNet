@@ -66,6 +66,7 @@
     <Compile Include="Tests\ParallaxTest.cs" />
     <Compile Include="Tests\SpriteTest.cs" />
     <Compile Include="Tests\ParticleTest.cs" />
+    <Compile Include="Tests\PrimitivesTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainWindow.xib" />

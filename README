@@ -39,6 +39,7 @@ The main infrastructure
 - TextureMgr
 - Label,
 - Camera
+- Drawing primitives
 - etc
 
 Texture Related
@@ -64,5 +65,16 @@ Particle Systems
 - ParticleSystem base class, PointParticleSystem
 - most point examples
 - ParticleTest.cs
+
+
+CONTRIBUTING and DEVELOPMENT
+==========
+If you would like to contribute anything, please do. You can fork on github, send me patches, whatever. I will credit
+all contributors in the AUTHORS file.
+
+This project is a supporting project to my main iPhone development. In other words, I am writing some games and
+using CocosNet as their engine. So I am porting things to CocosNet mostly on an as needed basis for me. So I don't
+always work on CocosNet directly, but rest assured it's always in my sights and will receive regular love.
+
 
 

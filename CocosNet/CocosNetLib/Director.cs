@@ -65,7 +65,7 @@ namespace CocosNet {
 		private Director() {
 			_pixelFormat = Texture2DPixelFormat.RGB565;
 			_depthBufferFormat = DepthBufferFormat.DepthBufferNone;
-			RunningScene = null; 
+			RunningScene = null;
 			_oldAnimationInterval = AnimationInterval = 1.0 / DefaultFPS;
 			
 			_sceneStack = new Stack<Scene>(10);
@@ -90,7 +90,7 @@ namespace CocosNet {
 				
 				_fpsLabel.Text = string.Format("{0:0.00}", _frameRate);
 			}
-		
+			
 			_fpsLabel.Draw();
 		}
 
@@ -180,17 +180,17 @@ namespace CocosNet {
 				}
 				
 				GL.PopMatrix();
-
+				
 				OpenGLView.SwapBuffers();
 			} catch (Exception e) {
 				Console.WriteLine("EXCEPTION: " + e.ToString());
 			}
 		}
-		
+
 		private void OnSave(UIImage image, NSError error) {
 			Console.WriteLine("SAVED");
 		}
-		
+
 		private bool IsOpenGLAttached {
 			get { return OpenGLView != null && OpenGLView.Superview != null; }
 		}
@@ -221,7 +221,7 @@ namespace CocosNet {
 				}
 				
 				OpenGLView.SetAutoResizesEaglSurface(true);
-			
+				
 			} else {
 				OpenGLView.Frame = rect;
 			}
@@ -332,24 +332,24 @@ namespace CocosNet {
 		public DeviceOrientation DeviceOrientation {
 			get { return _deviceOrientation; }
 			set {
-				//if (value != _deviceOrientation) {
-				_deviceOrientation = value;
-				switch (_deviceOrientation) {
-					case DeviceOrientation.Portrait:
-					case DeviceOrientation.PortraitUpsideDown:
-						UIApplication.SharedApplication.SetStatusBarOrientation(UIInterfaceOrientation.Portrait, false);
-						break;
-					case DeviceOrientation.LandscapeLeft:
-						UIApplication.SharedApplication.SetStatusBarOrientation(UIInterfaceOrientation.LandscapeRight, false);
-						break;
-					case DeviceOrientation.LandscapeRight:
-						UIApplication.SharedApplication.SetStatusBarOrientation(UIInterfaceOrientation.LandscapeLeft, false);
-						break;
-					default:
-						throw new InvalidEnumArgumentException("DeviceOrientation", (int)_deviceOrientation, typeof(DeviceOrientation));
-					
+				if (value != _deviceOrientation) {
+					_deviceOrientation = value;
+					switch (_deviceOrientation) {
+						case DeviceOrientation.Portrait:
+						case DeviceOrientation.PortraitUpsideDown:
+							UIApplication.SharedApplication.SetStatusBarOrientation(UIInterfaceOrientation.Portrait, false);
+							break;
+						case DeviceOrientation.LandscapeLeft:
+							UIApplication.SharedApplication.SetStatusBarOrientation(UIInterfaceOrientation.LandscapeRight, false);
+							break;
+						case DeviceOrientation.LandscapeRight:
+							UIApplication.SharedApplication.SetStatusBarOrientation(UIInterfaceOrientation.LandscapeLeft, false);
+							break;
+						default:
+							throw new InvalidEnumArgumentException("DeviceOrientation", (int)_deviceOrientation, typeof(DeviceOrientation));
+						
+					}
 				}
-				//}
 			}
 		}
 
@@ -498,10 +498,10 @@ namespace CocosNet {
 			IsPaused = false;
 			_dt = 0;
 		}
-	
+
 		private void StartAnimation() {
 			Debug.Assert(_animationTimer == null, "_animationTimer must be null. Calling StartAnimation twice?");
-
+			
 			// creating a TimeSpan with ticks. 10 million ticks per second.
 			_animationTimer = NSTimer.CreateRepeatingTimer(TimeSpan.FromTicks(Convert.ToInt64(AnimationInterval * 10000000L)), MainLoop);
 			
@@ -512,7 +512,7 @@ namespace CocosNet {
 			_animationTimer.Dispose();
 			_animationTimer = null;
 		}
-		
+
 		public PointF ConvertCoordinate(PointF p) {
 			float newY = OpenGLView.Frame.Size.Height - p.Y;
 			float newX = OpenGLView.Frame.Size.Width - p.X;

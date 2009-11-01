@@ -46,7 +46,11 @@ namespace CocosNetTests {
 		
 		protected abstract ICloneable[] Scenes { get; }
 		
-		public TestBase() {
+		public TestBase() : this(DeviceOrientation.LandscapeLeft) {
+		}
+		
+		public TestBase(DeviceOrientation orientation) {
+			Director.Instance.DeviceOrientation = orientation;
 			SizeF s = Director.Instance.WinSize;
 			
 			Label label = new Label(ToString(), "Arial", 32);

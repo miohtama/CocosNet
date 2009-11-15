@@ -22,9 +22,14 @@ namespace CocosNet.Actions {
 				return _instance;
 			}
 		}
+		
+		private Scheduler.Timer _timer;
 
 		private ActionManager() {
-			Scheduler.Instance.Tick += Tick;
+			_timer = new Scheduler.Timer();
+			_timer.Tick += Tick;
+			Scheduler.Instance.Schedule(_timer);
+			
 			_hash = new Dictionary<CocosNode, HashElement>();
 		}
 		

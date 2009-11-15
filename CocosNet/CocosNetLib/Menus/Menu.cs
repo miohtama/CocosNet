@@ -165,7 +165,10 @@ namespace CocosNet.Menus {
 				}
 				
 				_selectedItem = currentItem;
-				_selectedItem.OnSelected();
+				
+				if (_selectedItem != null) {
+					_selectedItem.OnSelected();
+				}
 			}
 		}
 

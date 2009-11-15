@@ -41,9 +41,9 @@ namespace CocosNetTests {
 			// To run a different test, instantiate a different class here
 			// SpriteTest -- SpriteManual
 			// ParallaxTest -- Parallax1
-			// ParticleTest -- DemoFireworks
+			// ParticleTest -- DemoFirework
 			// PrimitivesTest -- HorizontalDrawPrimitives
-			Scene scene = new Scene(new HorizontalDrawPrimitives());
+			Scene scene = new Scene(new DemoFirework());
 			
 			Director.Instance.RunScene(scene);
 		}

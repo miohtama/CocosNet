@@ -51,6 +51,7 @@ namespace CocosNet.Particle {
 		}
 		#endregion
 
+		protected Scheduler.Timer _timer;
 		protected Particle[] _particles;
 		protected float _elapsed;
 		protected float _emitCounter;
@@ -194,14 +195,17 @@ namespace CocosNet.Particle {
 			PositionType = PositionType.Free;
 			
 			AutoRemoveOnFinish = false;
+			
+			_timer = new Scheduler.Timer();
+			_timer.Tick += OnTick;
 		}
 
 		public override void OnEnter() {
-			Scheduler.Instance.Tick += OnTick;
+			Scheduler.Instance.Schedule(_timer);
 		}
 
 		public override void OnExit() {
-			Scheduler.Instance.Tick -= OnTick;
+			Scheduler.Instance.Unschedule(_timer);
 		}
 
 

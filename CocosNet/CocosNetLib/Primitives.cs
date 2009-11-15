@@ -16,8 +16,8 @@ namespace CocosNet {
 			
 			return vertices;
 		}
-
-		public static void DrawPoint(PointF point) {
+		
+		public static void DrawPoint(PointF point) {			
 			Vertex2F[] vertex = { point.ToVertex2F() };
 			
 			GL.VertexPointer(2, All.Float, 0, vertex);

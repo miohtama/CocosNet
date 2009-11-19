@@ -3,6 +3,7 @@ using OpenTK.Graphics.ES11;
 using CocosNet.Base;
 using System.Drawing;
 using CocosNet.Support;
+using CocosNet.Vector;
 
 namespace CocosNet.Particle {
 

@@ -7,6 +7,7 @@
 *.a
 *.o
 *.pidb
-*/bin/*
+bin/
 *.userprefs
 *.dll
+test-results/

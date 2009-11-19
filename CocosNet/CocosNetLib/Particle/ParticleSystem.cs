@@ -4,6 +4,7 @@ using CocosNet;
 using CocosNet.Base;
 using System.Drawing;
 using CocosNet.Support;
+using CocosNet.Vector;
 using Color = CocosNet.Base.Color;
 
 namespace CocosNet.Particle {

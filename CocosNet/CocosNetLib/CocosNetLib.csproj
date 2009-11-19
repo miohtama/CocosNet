@@ -107,6 +107,8 @@
     <Compile Include="Particle\ParticleExamples.cs" />
     <Compile Include="Support\PVRTexture.cs" />
     <Compile Include="Primitives.cs" />
+    <Compile Include="Vector\PointFExtensions.cs" />
+    <Compile Include="Vector\RotationMatrix.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base\" />
@@ -120,6 +122,7 @@
     <Folder Include="Actions\" />
     <Folder Include="Effects\" />
     <Folder Include="Support\" />
+    <Folder Include="Vector\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

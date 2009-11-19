@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using CocosNet.Base;
+using CocosNet.Vector;
 using OpenTK.Graphics.ES11;
 
 namespace CocosNet {

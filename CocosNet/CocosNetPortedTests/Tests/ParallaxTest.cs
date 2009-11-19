@@ -16,6 +16,7 @@ using CocosNet.Tiles;
 using CocosNet.Actions;
 using CocosNet.Support;
 using CocosNet.Base;
+using CocosNet.Vector;
 
 namespace CocosNetTests {
 	public abstract class ParallaxDemo : TestBase {

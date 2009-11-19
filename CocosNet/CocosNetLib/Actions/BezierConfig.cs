@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using CocosNet.Vector;
 
 namespace CocosNet.Actions {
 	public struct BezierConfig {

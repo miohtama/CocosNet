@@ -272,6 +272,12 @@ namespace CocosNet {
 				return s;
 			}
 		}
+		
+		public PointF ScreenCenter {
+			get {
+				return new PointF(WinSize.Width / 2.0f, WinSize.Height / 2.0f);
+			}
+		}
 
 		public SizeF DisplaySize {
 			get { return OpenGLView.Frame.Size; }

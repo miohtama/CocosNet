@@ -17,6 +17,8 @@ namespace CocosNet {
 
 		#region private Timer class
 		public class Timer {
+			public const int LastPriority = int.MaxValue;
+			
 			private float _elapsed = -1;
 
 			public event EventHandler<TickEventArgs> Tick;
@@ -56,6 +58,7 @@ namespace CocosNet {
 		private List<Scheduler.Timer> _timersToRemove;
 		private List<Scheduler.Timer> _timers;
 		private float _elapsed;
+		private int _tickNumber;
 
 		private void RemovePendingTimers() {
 			foreach (Timer timer in _timersToRemove) {
@@ -112,7 +115,7 @@ namespace CocosNet {
 			RemovePendingTimers();
 			AddPendingTimers();
 			
-			TickEventArgs te = new TickEventArgs(dt, _elapsed);
+			TickEventArgs te = new TickEventArgs(dt, _elapsed, _tickNumber++);
 			
 			foreach (Timer timer in _timers) {
 				timer.OnTick(te);
@@ -159,10 +162,12 @@ namespace CocosNet {
 	public class TickEventArgs : EventArgs {
 		public float Delta { get; private set; }
 		public float TotalTime { get; private set; }
+		public int TickNumber { get; private set; }
 
-		public TickEventArgs(float dt, float total) {
+		public TickEventArgs(float dt, float total, int tickNumber) {
 			Delta = dt;
 			TotalTime = total;
+			TickNumber = tickNumber;
 		}
 	}
 }

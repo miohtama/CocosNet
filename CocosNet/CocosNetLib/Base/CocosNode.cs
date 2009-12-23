@@ -21,14 +21,12 @@ namespace CocosNet.Base {
 		private PointF _transformAnchor;
 		private float _rotation;
 		private bool _isTransformDirty;
-		private bool _isInverseDirty;
 		private float _scaleX;
 		private float _scaleY;
 		private PointF _position;
 		private PointF _anchorPoint;
 		private bool _isRelativeAnchorPoint;
 		private SizeF _contentSize;
-		private float _vertexZ;
 		private CGAffineTransform _transform;
 
 		private List<CocosNode> _children;
@@ -61,7 +59,7 @@ namespace CocosNet.Base {
 			get { return _rotation; }
 			set {
 				_rotation = value;
-				_isTransformDirty = _isInverseDirty = true;
+				_isTransformDirty = true;
 			}
 		}
 
@@ -69,7 +67,7 @@ namespace CocosNet.Base {
 			get { return _scaleX; }
 			set {
 				_scaleX = value;
-				_isTransformDirty = _isInverseDirty = true;
+				_isTransformDirty = true;
 			}
 		}
 
@@ -77,7 +75,7 @@ namespace CocosNet.Base {
 			get { return _scaleY; }
 			set {
 				_scaleY = value;
-				_isTransformDirty = _isInverseDirty = true;
+				_isTransformDirty = true;
 			}
 		}
 
@@ -91,7 +89,7 @@ namespace CocosNet.Base {
 			}
 			set {
 				ScaleX = ScaleY = value;
-				_isTransformDirty = _isInverseDirty = true;
+				_isTransformDirty = true;
 			}
 		}
 
@@ -99,7 +97,7 @@ namespace CocosNet.Base {
 			get { return _transformAnchor; }
 			set {
 				_transformAnchor = value;
-				_isTransformDirty = _isInverseDirty = true;
+				_isTransformDirty = true;
 			}
 		}
 
@@ -127,7 +125,7 @@ namespace CocosNet.Base {
 			get { return _isRelativeAnchorPoint; }
 			set {
 				_isRelativeAnchorPoint = value;
-				_isTransformDirty = _isInverseDirty = true;
+				_isTransformDirty = true;
 			}
 		}
 
@@ -139,8 +137,7 @@ namespace CocosNet.Base {
 			AnchorPoint = PointF.Empty;
 			ContentSize = SizeF.Empty;
 			IsRelativeAnchorPoint = true;
-			_isTransformDirty = _isInverseDirty = true;
-			_vertexZ = 0;
+			_isTransformDirty = true;
 			Grid = null;
 			Visible = true;
 			Tag = CocosNodeTagInvalid;
@@ -196,19 +193,19 @@ namespace CocosNet.Base {
 			_position.X = x;
 			_position.Y = y;
 			
-			_isTransformDirty = _isInverseDirty = true;
+			_isTransformDirty = true;
 		}
 		
 		public void SetPosition(PointF point) {
 			_position = point;
-			_isTransformDirty = _isInverseDirty = true;
+			_isTransformDirty = true;
 		}
 
 		public void MoveBy(float dx, float dy) {
 			_position.X = _position.X + dx;
 			_position.Y = _position.Y + dy;
 			
-			_isTransformDirty = _isInverseDirty = true;
+			_isTransformDirty = true;
 		}
 		
 		public PointF Position {
@@ -237,14 +234,14 @@ namespace CocosNet.Base {
 			child._zorder = z;
 		}
 
-		private void ReorderChild(CocosNode child, int z) {
-			if (child == null) {
-				throw new ArgumentNullException("child");
-			}
-			
-			_children.Remove(child);
-			InsertChild(child, z);
-		}
+//		private void ReorderChild(CocosNode child, int z) {
+//			if (child == null) {
+//				throw new ArgumentNullException("child");
+//			}
+//			
+//			_children.Remove(child);
+//			InsertChild(child, z);
+//		}
 
 		public virtual void RemoveChild(CocosNode child, bool cleanup) {
 			if (child != null) {

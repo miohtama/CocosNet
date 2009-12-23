@@ -5,7 +5,7 @@
 using System;
 
 namespace CocosNet.Layers {
-	public class TransitionScene {
+	public class TransitionScene : Scene {
 		// not needed for current porting efforts
 	}
 }

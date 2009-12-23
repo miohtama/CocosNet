@@ -166,10 +166,14 @@ namespace CocosNet {
 		public TextureAtlas(string file, int capacity) : this(TextureMgr.Instance.AddImage(file), capacity) {
 		}
 
-		public TextureAtlas(Texture2D tex, int capacity) {
+		public TextureAtlas(Texture2D texture, int capacity) {
+			if (texture == null) {
+				throw new ArgumentNullException("texture");
+			}
+			
 			_capacity = capacity;
 			
-			Texture = tex;
+			Texture = texture;
 			
 			_quads = new AtlasList<GLPointQuad3F>(_capacity);
 			_indices = new AtlasList<ushort>(_capacity * 6);

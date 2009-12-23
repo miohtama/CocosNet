@@ -98,7 +98,7 @@ namespace CocosNet.Support {
 					GL.TexImage2D(All.Texture2D, 0, (int)All.Alpha, pixelsWide, pixelsHigh, 0, All.Alpha, All.UnsignedByte, data);
 					break;
 				default:
-					throw new InvalidEnumArgumentException("pixelFormat", (int)pixelFormat, typeof(PixelFormat));
+					throw new InvalidEnumArgumentException("pixelFormat", (int)pixelFormat, typeof(Texture2DPixelFormat));
 			}
 			
 			ContentSize = contentSize;

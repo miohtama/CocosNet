@@ -28,11 +28,36 @@ namespace CocosNet {
 			return radians * 180.0f / (float)Math.PI;
 		}
 		
+		public static float ClampDegreeAngle(this float degrees) {
+			while (degrees < 0) {
+				degrees += 360;
+			}
+			
+			while (degrees > 360) {
+				degrees -= 360;
+			}
+			
+			return degrees;
+		}
+		
+		public static int Sign(this float f) {
+			if (f < 0) {
+				return -1;
+			}
+			
+			if (f == 0) {
+				return 0;
+			}
+			
+			return 1;
+		}
+			
+		
 		#endregion numeric extensions
 		
 		#region list extensions
 		
-		public static void Each<T>(this List<T> list, Action<T> action) {
+		public static void Each<T>(this IList<T> list, Action<T> action) {
 			if (list == null) {
 				throw new ArgumentNullException("list");
 			}

@@ -192,7 +192,15 @@ namespace CocosNet.Menus {
 			
 			_state = MenuState.Waiting;
 		}
-		
+
 		#endregion Touch Events
+
+		public override void OnEnter() {
+			IsTouchEnabled = true;
+		}
+
+		public override void OnExit() {
+			IsTouchEnabled = false;
+		}	
 	}
 }

@@ -154,5 +154,13 @@ namespace CocosNet.Vector {
 		
 			return p;
 		}
+		
+		public static bool EqualsFuzzy(this PointF p, PointF other) {
+			return EqualsFuzzy(p, other, .0001f);
+		}
+		
+		public static bool EqualsFuzzy(this PointF p, PointF other, float fuzz) {
+			return Math.Abs(p.X - other.X) < fuzz && Math.Abs(p.Y - other.Y) < fuzz;	
+		}
 	}
 }

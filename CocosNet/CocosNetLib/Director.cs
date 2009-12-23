@@ -103,6 +103,7 @@ namespace CocosNet {
 			}
 		}
 
+#pragma warning disable 0169 // never used, because this is a lib, external callers would call this
 		private void SetTexture2D(bool @on) {
 			if (@on) {
 				GL.Enable(All.Texture2D);
@@ -110,6 +111,7 @@ namespace CocosNet {
 				GL.Disable(All.Texture2D);
 			}
 		}
+#pragma warning restore 0169
 
 		private void SetDepthTest(bool @on) {
 			if (@on) {
@@ -185,10 +187,6 @@ namespace CocosNet {
 			} catch (Exception e) {
 				Console.WriteLine("EXCEPTION: " + e.ToString());
 			}
-		}
-
-		private void OnSave(UIImage image, NSError error) {
-			Console.WriteLine("SAVED");
 		}
 
 		private bool IsOpenGLAttached {
@@ -439,10 +437,7 @@ namespace CocosNet {
 			_nextScene.Target = scene;
 		}
 
-		public void PopScene(Scene scene) {
-			if (scene == null) {
-				throw new ArgumentNullException("scene");
-			}
+		public void PopScene() {
 			
 			_sceneStack.Pop();
 			if (_sceneStack.IsEmpty()) {

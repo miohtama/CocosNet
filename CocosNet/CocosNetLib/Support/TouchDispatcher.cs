@@ -27,7 +27,7 @@ namespace CocosNet.Support {
 				}
 				
 				if (object.Equals(h.Delegate, handler.Delegate)) {
-					throw new InvalidOperationException("Delegate already added to touch dispatcher");
+					return;
 				}
 			}
 			_touchHandlers.Insert(i, handler);

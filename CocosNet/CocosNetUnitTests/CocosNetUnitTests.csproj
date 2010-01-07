@@ -35,10 +35,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Developer\MonoTouch\usr\lib\mono\2.1\monotouch.dll</HintPath>
     </Reference>
-    <Reference Include="CocosNetLib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CocosNetLib\bin\iPhoneSimulator\Release\CocosNetLib.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SchedulerTests.cs" />
@@ -46,4 +42,10 @@
     <Compile Include="RotationMatrixTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\CocosNetLib\CocosNetLib.csproj">
+      <Project>{BFBBC3E5-4ECF-4262-9658-918A097207D1}</Project>
+      <Name>CocosNetLib</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

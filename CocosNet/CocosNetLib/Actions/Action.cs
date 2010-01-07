@@ -12,7 +12,7 @@ using Color = CocosNet.Base.Color;
 using CocosNet.Sprites;
 
 namespace CocosNet.Actions {
-	public abstract class Action : ICloneable {
+	public abstract class Action {
 		public const int ActionTagInvalid = -1;
 
 		public CocosNode Target { get; set; }
@@ -27,7 +27,7 @@ namespace CocosNet.Actions {
 			return string.Format("{0}, Tag: {1}", base.ToString(), Tag);
 		}
 
-		public abstract object Clone();
+		public abstract Action Clone();
 
 		public abstract void Start();
 
@@ -120,7 +120,7 @@ namespace CocosNet.Actions {
 			_position = position;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new Place(_position);
 		}
 
@@ -134,7 +134,7 @@ namespace CocosNet.Actions {
 			Target.Visible = !Target.Visible;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new ToggleVisibility();
 		}
 
@@ -148,7 +148,7 @@ namespace CocosNet.Actions {
 			Target.Visible = false;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new Hide();
 		}
 
@@ -162,7 +162,7 @@ namespace CocosNet.Actions {
 			Target.Visible = true;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new Show();
 		}
 
@@ -187,7 +187,7 @@ namespace CocosNet.Actions {
 			_total = 0;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new Repeat(_other.Clone() as FiniteTimeAction, _times);
 		}
 
@@ -228,7 +228,7 @@ namespace CocosNet.Actions {
 			_repeatedAction = repeatedAction;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new RepeatForever(_repeatedAction);
 		}
 
@@ -347,7 +347,7 @@ namespace CocosNet.Actions {
 			return new Sequence(_actions[1].Reverse() as FiniteTimeAction, _actions[0].Reverse() as FiniteTimeAction);
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			Sequence newSequence = new Sequence(_actions[0], _actions[1]);
 			newSequence._split = _split;
 			newSequence._last = _last;
@@ -399,7 +399,7 @@ namespace CocosNet.Actions {
 			}
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new Spawn(_first.Clone() as FiniteTimeAction, _second.Clone() as FiniteTimeAction);
 		}
 
@@ -431,7 +431,7 @@ namespace CocosNet.Actions {
 			_action = action;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new ReverseTime(_action.Clone() as FiniteTimeAction);
 		}
 
@@ -478,7 +478,7 @@ namespace CocosNet.Actions {
 			Target.SetPosition(pos.X, pos.Y);
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			MoveTo newMoveTo = new MoveBy(Duration, _endPosition);
 			newMoveTo._delta = _delta;
 			
@@ -507,7 +507,7 @@ namespace CocosNet.Actions {
 			_delta = tmp;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			MoveBy newMoveBy = new MoveBy(Duration, _delta);
 			
 			return newMoveBy;
@@ -528,7 +528,7 @@ namespace CocosNet.Actions {
 			_originalAngle = _angle = angle;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new RotateTo(Duration, _originalAngle);
 		}
 
@@ -565,7 +565,7 @@ namespace CocosNet.Actions {
 			_angle = angle;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new RotateBy(Duration, _angle);
 		}
 
@@ -600,7 +600,7 @@ namespace CocosNet.Actions {
 			_endScaleY = scaleY;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new ScaleTo(Duration, _endScaleX, _endScaleY);
 		}
 
@@ -652,7 +652,7 @@ namespace CocosNet.Actions {
 			_jumps = jumps;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new JumpBy(Duration, _delta, _height, _jumps);
 		}
 
@@ -697,7 +697,7 @@ namespace CocosNet.Actions {
 			_config = config;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new BezierBy(Duration, _config);
 		}
 
@@ -735,7 +735,7 @@ namespace CocosNet.Actions {
 			_times = times;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new Blink(Duration, _times);
 		}
 
@@ -763,7 +763,7 @@ namespace CocosNet.Actions {
 			return new FadeOut(Duration);
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new FadeIn(Duration);
 		}
 	}
@@ -784,7 +784,7 @@ namespace CocosNet.Actions {
 			return new FadeIn(Duration);
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new FadeOut(Duration);
 		}
 	}
@@ -797,7 +797,7 @@ namespace CocosNet.Actions {
 			_to = Color.FromRGBA(red, green, blue, 255);
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new TintTo(Duration, _to.R, _to.G, _to.G);
 		}
 
@@ -830,7 +830,7 @@ namespace CocosNet.Actions {
 			_db = db;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new TintBy(Duration, _dr, _dg, _db);
 		}
 
@@ -860,7 +860,7 @@ namespace CocosNet.Actions {
 			// just killing time...
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new DelayTime(Duration);
 		}
 

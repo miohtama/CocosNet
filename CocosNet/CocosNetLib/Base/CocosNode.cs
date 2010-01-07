@@ -55,11 +55,13 @@ namespace CocosNet.Base {
 		public int Tag { get; set; }
 		public object UserData { get; set; }
 
-		public float Rotation {
+		public virtual float Rotation {
 			get { return _rotation; }
 			set {
-				_rotation = value;
-				_isTransformDirty = true;
+				if (_rotation != value) {
+					_rotation = value;
+					_isTransformDirty = true;
+				}
 			}
 		}
 
@@ -131,7 +133,7 @@ namespace CocosNet.Base {
 
 		public CocosNode() {
 			IsRunning = false;
-			Rotation = 0;
+			_rotation = 0;
 			ScaleX = ScaleY = 1;
 			TransformAnchor = PointF.Empty;
 			AnchorPoint = PointF.Empty;
@@ -195,7 +197,7 @@ namespace CocosNet.Base {
 			
 			_isTransformDirty = true;
 		}
-		
+
 		public void SetPosition(PointF point) {
 			_position = point;
 			_isTransformDirty = true;
@@ -207,13 +209,11 @@ namespace CocosNet.Base {
 			
 			_isTransformDirty = true;
 		}
-		
+
 		public PointF Position {
-			get {
-				return _position;
-			}
+			get { return _position; }
 		}
-		
+
 		private void InsertChild(CocosNode child, int z) {
 			int i = 0;
 			bool added = false;
@@ -447,7 +447,7 @@ namespace CocosNet.Base {
 		public PointF ConvertToNodeSpace(PointF worldPoint) {
 			return WorldToNodeTransform().TransformPoint(worldPoint);
 		}
-		
+
 		public PointF ConvertToWorldSpace(PointF nodePoint) {
 			return NodeToWorldTransform().TransformPoint(nodePoint);
 		}

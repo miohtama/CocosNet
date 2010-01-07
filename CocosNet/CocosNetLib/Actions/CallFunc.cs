@@ -17,7 +17,7 @@ namespace CocosNet.Actions {
 			_method = method;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new CallFunc(_method);
 		}
 
@@ -37,7 +37,7 @@ namespace CocosNet.Actions {
 			_method = method;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new CallFuncN(_method);
 		}
 
@@ -59,7 +59,7 @@ namespace CocosNet.Actions {
 			_data = data;
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new CallFuncND(_method, _data);
 		}
 

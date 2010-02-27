@@ -1,7 +1,7 @@
 # CocosNet #
-This readme last changed: 2/23/2010
-matt.e.greer@gmail.com
-http://github.com/city41/cocosnet
+This readme last changed: 2/27/2010  
+matt.e.greer@gmail.com  
+http://github.com/city41/cocosnet  
 
 ## CocosNet is... #
 A port of [Cocos2D for the iPhone](http://www.cocos2d-iphone.org) to the [MonoTouch](http://monotouch.net) platform. Cocos2D for the iPhone was in turn a port of [Cocos2D](http://www.cocos2d.org) which is written in Python.
@@ -24,43 +24,50 @@ Please see the AUTHORS file for a list of contributors
   
 
           // To run a different test, instantiate a different class here  
-          // SpriteTest -** SpriteManual  
-          // ParallaxTest -** Parallax1  
+          // SpriteTest -- SpriteManual  
+          // ParallaxTest -- Parallax1  
           Scene scene = new Scene(new SpriteManual());
 
 ## What has been ported so far ##
 The following generally works well in CocosNet
 
 The main infrastructure  
-* Director  
-* CocosNode, TextureNode, AtlasNode  
-* Layer, Scene  
-* TextureMgr  
-* Label,  
-* Camera  
-* Drawing primitives  
-* etc  
+  
+* Director
+* CocosNode, TextureNode, AtlasNode
+* Layer, Scene
+* TextureMgr
+* Label
+* Camera
+* Drawing primitives
+* etc
   
 Texture Related  
+
 * Texture2D  
 * PVRTexture  
   
 Atlases  
+
 * TextureAtlas and LayerAtlas  
   
 Menus  
+
 * Menu  
 * MenuItemImage  
   
 Actions  
+
 * most sprite oriented actions implemented  
 * see SpriteTest.cs and the Actions namespace  
   
 Parallax  
+
 * ParallaxNode  
 * see ParallaxTest.cs  
   
 Particle Systems  
+
 * ParticleSystem base class, PointParticleSystem  
 * most point examples  
 * ParticleTest.cs  

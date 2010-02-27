@@ -1,0 +1,157 @@
+CocosNet Contributor's Guide
+============================
+Last updated: 2/27/2010
+
+History
+-------
+2/27/2010 -- initial creation of the guide
+
+
+
+About this Guide
+===============
+Has been almost entirely me. The kind folks at #monotouch (on irc.freenode.net) have helped with issues and given general support, but the actual work has almost been exclusively me so far. This guide is an attempt to allow people to more easily become contributors to the project and feel like their contributions are efficient and well received.
+
+Please feel free to contact me if you disagree with anything or have any ideas. I'm totally open to anything, CocosNet does not have to be just my vision, I'd love to see it become a more community oriented project.
+
+
+General rule of thumb
+===============
+In my opinion, it's much better to just go for it and fix/improve things as we go. If you are unsure of something, just go for what feels best. If it turns out to be wrong, big deal, we'll change it later. Don't be afraid to dive into the code!
+
+
+
+License your contributions fall under
+================
+CocosNet's license is basically LGPL. That is because Cocos2d's license is that. When contributing, your contributions need to be compatible with that license. LGPL, MIT, public domain, etc all work fine. GPL does not. If unsure, please email me (matt.e.greer@gmail.com) and we will sort it out.
+
+
+
+Contribution recognition
+===============
+There is a AUTHORS file at the root of CocosNet, when you contribute I will list your contribution there. So far, that's it. More recognition may come in the future.
+
+
+
+Cocos2D version the port is based off of
+================
+version 0.8.1
+
+I began the port when Cocos2D 0.8.1 was current, and thus that is the version I have based CocosNet off of. Despite newer versions coming since then, I have not moved onto them. There is so much of Cocos2D not yet ported it doesn't make sense to have to deal with a moving target at this point.
+
+
+
+Cocos2D's tests
+===============
+Cocos2d comes with a large suite of tests. These tests are actually more like small Cocos2D apps that exercise specific portions of the engine. They are not tests in the sense of a result compared to an expected output.
+
+So, it is important to build Cocos2D and run the test you are interested in, and compare it to the ported CocosNet test and manually verify your ported test app behaves the same.
+
+
+CocosNet's projects
+==============
+CocosNetLib
+----------
+This is, of course, CocosNet itself. Anything that will be part of CocosNet needs to be in this project, and ultimately built into the main CocosNet assembly
+
+CocosNetPortedTests
+----------
+This project is CocosNet's port of Cocos2D's tests. There is a Tests folder, which contains the tests ported thus far. There is also a TestBase class (at the root of the project) which makes porting tests a little easier. You will see I have not 100% followed what Cocos2D did, I have reduced some repetition and made some slight changes to make porting faster (see below).
+
+CocosNetUnitTests
+----------
+These unit tests are 100% brand new to CocosNet and have no Cocos2D equivalent. Also, due to the way MonoTouch interacts with NUnit, this project is a bit funky and may be confusing. If you want to take a look, go for it. But for now, feel free to ignore this project. I will further document it in the future and see about making it more contributor friendly. I would like CocosNet to have a nice suite of automated tests, and this project is the start of that.
+
+
+
+How I Generally Port
+================
+- I have Cocos2D 0.8.1's source code on my machine and loaded up into xcode. 
+- I pick a test that I am interested in and begin a direct 1:1 port of the test from Cocos2D into CocosNet's CocosNetPortedTests project, in the Tests folder.
+- As I find things the test needs that don't yet exist, I implement them in CocosNetLib.
+- Once the ported test matches the Cocos2D test satisfactorily, I consider that chunk of Cocos2D now ported.
+- I then make note in README.md the new functionality now available in CocosNet
+
+
+
+Porting Cocos2D tests
+================
+You should find that the way I am porting tests into CocosNetPortedTests is pretty straightforward. PrimitiveTest.cs is probably the simplest test to play with and get a feel for how they work.
+
+TestBase class
+-------
+This is an abstract base class which provides the navigation of the tests: the arrow buttons to move from test scene to test scene. If you run a Cocos2D test, (or a CocosNet ported test) you will see what I mean.
+
+The scenes that TestBase flips through as the user presses the arrow buttons are provided by
+
+protected abstract ICloneable[] Scenes { get; }
+
+When you subclass TestBase, you need to provide an array of scenes your tests have. You will see this in all the existing ported tests.
+
+Each ported test then provides a base class for the test, such as SpriteDemo, ParallaxDemo, etc. Then the actual scenes are subclassed from there: SpriteManual, SpriteMove, Parallax1, Parallax2, etc. It is these ultimate leaf classes in the hierarchy that are fed into TestBase's Scenes property.
+
+From there you should find the code of the tests matches the code in the Cocos2D tests very directly.
+
+I haven't always remained faithful to the Cocos2D tests, you will see my Parallax tests are a bit different. That's a judgment call, but most tests match their Cocos2D counterparts exactly.
+
+
+
+Using the existing infrastructure
+=================
+As you begin porting stuff, you will find yourself needing Director, CGPoint, Scene, CocosNode, etc very often. These core classes of Cocos2D have all already been ported over, so chances are very good you can just make use of their CocosNet versions in CocosNetLib. 
+
+
+
+
+Namespaces
+===============
+ObjC does not support namespaces, and C# does. If you load Cocos2D into Xcode, you will see the project is broken down into folders. Generally speaking, each folder in Cocos2D becomes a namespace over in CocosNet. CocosNet also physically divides the code into folders that match the Cocos2D folders very closely.
+
+
+
+CGPoint becomes PointF
+==============
+Cocos2D uses CGPoint as it's "vector" class as well as just a general (x,y) coordinate. In CocosNet, System.Drawing.PointF is used. 
+
+In CocosNetLib, in the Vector folder, you will find PointFExtensions.cs. These are extension methods for PointF that make PointF perform all of the vector and coordinate needs of CocosNet. In Cocos2D these methods are static C methods that take in CGPoints. You will find all of these methods are extension methods in CocosNet.
+
+
+
+Reporting bugs
+==========
+So far I am just using github's issue tracker. It is very simple, but is adequate for now. If you find a bug, feel free to record it on github.
+
+
+
+
+Misc Stuff to be aware of
+===============
+PointF.EqualsFuzzy (in PointFExtensions.cs)
+------------
+There are places in CocosNet where you need to see if two PointF's are equal. But since they are floating point structures, and the two points may have been created by two different code paths, there are often rounding errors. EqualsFuzzy basically says "yes these two PointFs are equal within a certain range of significant digits"
+
+private, protected, public, etc
+------------
+ObjC has no official concept of visibility of members. Everything is public. So sometimes when porting you need to make a judgment call on what visibility a method/property should have. Just make whatever feels right. We can always change it later.
+
+
+
+
+
+
+
+
+WHAT IS NEEDED
+===============
+People are asking me what to work on, what should I port? Seriously, for now, just go for it. send me an email (matt.e.greer@gmail.com) on what you are working on, and I will make sure there is no overlap. If it's not available in CocosNet yet, then it needs to be ported. If your game needs a certain feature (say transitions) and they aren't in CocosNet yet, then that is a great candidate for porting.
+
+As CocosNet grows and more people are contributing, I will respond by giving us more structure (forums? a mailing list?) to help us guide this along.
+
+
+
+
+
+
+
+
+ 

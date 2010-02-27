@@ -28,6 +28,13 @@ Please see the AUTHORS file for a list of contributors
           // ParallaxTest -- Parallax1  
           Scene scene = new Scene(new SpriteManual());
 
+## How to use CocosNet in your MonoTouch app ##
+CocosNet is not distributed as a binary, yet. So far it is all source code. The easiest way to add CocosNet into your application is to grab CocosNet from here, and then add the project to your MonoTouch solution, and build CocosNet along with your app.  
+  
+I recommend grabbing a tarball or zip file of CocosNet if you take this approach. I make certain CocosNet always builds and is usable.  
+  
+As CocosNet grows, we will move into official releases and you can then just reference an assembly in your app. We're not quite there yet.
+
 ## What has been ported so far ##
 The following generally works well in CocosNet
 

@@ -16,6 +16,16 @@ namespace CocosNet {
 	public static class ExtensionMethods {		
 		#region numeric extensions
 		
+		public static bool EqualsFuzzy(this float number, float other) {
+			return EqualsFuzzy(number, other, .0001f);
+		}
+		
+		public static bool EqualsFuzzy(this float number, float other, float fuzz) {
+			float delta = (float)Math.Abs(number - other);
+			
+			return delta < fuzz;
+		}
+		
 		public static bool IsOdd(this int number) {
 			return (number & 1) == 1;
 		}

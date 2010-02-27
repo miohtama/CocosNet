@@ -81,7 +81,7 @@ namespace CocosNet.Actions {
 			_radDeltaX = _deltaAngleX.ToRadians();
 		}
 
-		public override object Clone() {
+		public override Action Clone() {
 			return new OrbitCamera(Duration, _radius, _deltaRadius, _angleZ, _deltaAngleZ, _angleX, _deltaAngleX);
 		}
 

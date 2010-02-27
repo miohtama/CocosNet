@@ -161,9 +161,8 @@ namespace CocosNet {
 				
 				CalculateDeltaTime();
 				
-				if (!IsPaused) {
-					Scheduler.Instance.OnTick(_dt);
-				}
+				Scheduler.Instance.OnTick(_dt);
+				
 				
 				if (_nextScene.Target != null) {
 					SetNextScene();

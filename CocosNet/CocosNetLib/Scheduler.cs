@@ -155,6 +155,8 @@ namespace CocosNet {
 		}
 
 		public void UnscheduleAll() {
+			_timersToAdd.Clear();
+			_timersToRemove.Clear();
 			_timers.Clear();
 		}
 	}

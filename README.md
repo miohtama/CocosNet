@@ -31,39 +31,39 @@ Please see the AUTHORS file for a list of contributors
 ## What has been ported so far ##
 The following generally works well in CocosNet
 
-* The main infrastructure  
-** Director  
-** CocosNode, TextureNode, AtlasNode  
-** Layer, Scene  
-** TextureMgr  
-** Label,  
-** Camera  
-** Drawing primitives  
-** etc  
+The main infrastructure  
+* Director  
+* CocosNode, TextureNode, AtlasNode  
+* Layer, Scene  
+* TextureMgr  
+* Label,  
+* Camera  
+* Drawing primitives  
+* etc  
   
-* Texture Related  
-** Texture2D  
-** PVRTexture  
+Texture Related  
+* Texture2D  
+* PVRTexture  
   
-* Atlases  
-** TextureAtlas and LayerAtlas  
+Atlases  
+* TextureAtlas and LayerAtlas  
   
-* Menus  
-** Menu  
-** MenuItemImage  
+Menus  
+* Menu  
+* MenuItemImage  
   
-* Actions  
-** most sprite oriented actions implemented  
-** see SpriteTest.cs and the Actions namespace  
+Actions  
+* most sprite oriented actions implemented  
+* see SpriteTest.cs and the Actions namespace  
   
-* Parallax  
-** ParallaxNode  
-** see ParallaxTest.cs  
+Parallax  
+* ParallaxNode  
+* see ParallaxTest.cs  
   
-* Particle Systems  
-** ParticleSystem base class, PointParticleSystem  
-** most point examples  
-** ParticleTest.cs  
+Particle Systems  
+* ParticleSystem base class, PointParticleSystem  
+* most point examples  
+* ParticleTest.cs  
 
 
 ## How to Contribute ##

@@ -163,6 +163,10 @@ namespace CocosNet {
 
 	public class TickEventArgs : EventArgs {
 		public float Delta { get; private set; }
+		
+		/// <summary>
+		/// Gets the total amount of time that has elapsed since this timer started, in seconds.
+		/// </summary>
 		public float TotalTime { get; private set; }
 		public int TickNumber { get; private set; }
 

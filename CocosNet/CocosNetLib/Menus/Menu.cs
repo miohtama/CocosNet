@@ -39,7 +39,7 @@ namespace CocosNet.Menus {
 				r.X = 0;
 				r.Y = 0;
 				
-				if (r.Contains(local)) {
+				if (r.Contains(local) && item.IsEnabled) {
 					return item;
 				}
 			}
@@ -77,6 +77,8 @@ namespace CocosNet.Menus {
 			SetPosition(s.Width / 2f, s.Height / 2f);
 			
 			int z = 0;
+			
+			IsRunning = true;
 			
 			foreach (MenuItem item in items) {
 				AddChild(item, z);
@@ -196,6 +198,7 @@ namespace CocosNet.Menus {
 		#endregion Touch Events
 
 		public override void OnEnter() {
+			IsRunning = true;
 			IsTouchEnabled = true;
 		}
 

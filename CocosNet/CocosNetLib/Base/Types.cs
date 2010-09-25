@@ -35,10 +35,14 @@ namespace CocosNet.Base {
 			black.R = black.G = black.B = 0;
 			black.A = 255;
 			Black = black;
+			
+			Color t = Color.FromRGBA(0, 0, 0, 0);
+			Transparent = t;
 		}
 		
 		public static readonly Color Black;
 		public static readonly Color White;
+		public static readonly Color Transparent;
 		
 		public static Color FromRGBA(byte r, byte g, byte b, byte a) {
 			Color c = new Color();
@@ -209,6 +213,7 @@ namespace CocosNet.Base {
 		public const All DefaultBlendSrc = All.One;
 		public const All DefaultBlendDst = All.OneMinusSrcAlpha;
 		public static readonly BlendFunc DefaultBlendFunc = new BlendFunc(DefaultBlendSrc, DefaultBlendDst);
+		public static readonly BlendFunc TransparencyBlendFunc = new BlendFunc(All.SrcAlpha, All.OneMinusSrcAlpha);
 		
 		public All Src;
 		public All Dst;

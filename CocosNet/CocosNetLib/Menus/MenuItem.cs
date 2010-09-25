@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using CocosNet.Base;
 using Color = CocosNet.Base.Color;
+using OpenTK.Graphics.ES11;
 
 namespace CocosNet.Menus {
     public abstract class MenuItem : CocosNode {

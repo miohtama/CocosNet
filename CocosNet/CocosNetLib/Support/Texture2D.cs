@@ -42,8 +42,8 @@ namespace CocosNet.Support {
 		public Texture2DPixelFormat PixelFormat { get; private set; }
 		public int PixelsWide { get; private set; }
 		public int PixelsHigh { get; private set; }
-		public float MaxS { get; private set; }
-		public float MaxT { get; private set; }
+		public float MaxS { get;  set; }
+		public float MaxT { get;  set; }
 		public bool HasPremultipliedAlpha { get; private set; }
 		public uint Name {
 			get { return _name; }

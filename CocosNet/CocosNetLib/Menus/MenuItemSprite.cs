@@ -33,6 +33,32 @@ namespace CocosNet.Menus {
 			ContentSize = NormalImage.ContentSize;
 		}
 
+		public override void OnEnter() {
+			base.OnEnter();
+			
+			NormalImage.OnEnter();
+			if (!ReferenceEquals(NormalImage, SelectedImage)) {
+				SelectedImage.OnEnter();
+			}
+			
+			if (DisabledImage != null) {
+				DisabledImage.OnEnter();
+			}
+		}
+		
+		public override void OnExit() {
+			base.OnExit();
+			
+			NormalImage.OnExit();
+			if (!ReferenceEquals(NormalImage, SelectedImage)) {
+				SelectedImage.OnExit();
+			}
+			
+			if (DisabledImage != null) {
+				DisabledImage.OnExit();
+			}
+		}
+		
 		public override void OnSelected() {
 			_selected = true;
 		}
@@ -41,7 +67,7 @@ namespace CocosNet.Menus {
 			_selected = true;
 		}
 
-		public override void Draw() {
+		public override void Draw() {		
 			if (IsEnabled) {
 				if (_selected) {
 					SelectedImage.Draw();

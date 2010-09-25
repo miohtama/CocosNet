@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using CocosNet.Base;
 using CocosNet.Support;
+using OpenTK.Graphics.ES11;
 
 namespace CocosNet.Sprites {
     public class Sprite : TextureNode {
@@ -16,7 +17,7 @@ namespace CocosNet.Sprites {
 		}
 		
         public Sprite(string fileName) {
-        		Texture = TextureMgr.Instance.AddImage(fileName);	
+        	Texture = TextureMgr.Instance.AddImage(fileName);
         }
     }
 }

@@ -56,8 +56,8 @@ namespace CocosNet.Vector {
 			}
 		}
 
-		public static PointF Extrude(this PointF p, float angle, float length) {
-			float rads = angle.ToRadians();
+		public static PointF Extrude(this PointF p, float angleInDegrees, float length) {
+			float rads = angleInDegrees.ToRadians();
 			float x = length * (float)Math.Cos(rads);
 			float y = length * (float)Math.Sin(rads);
 			

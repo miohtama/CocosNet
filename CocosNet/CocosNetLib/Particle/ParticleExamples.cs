@@ -21,7 +21,9 @@ namespace CocosNet.Particle {
 			Speed = 180;
 			SpeedVar = 50;
 			
-			SetPosition(160, 160);
+			float pos = Director.Instance.WinSize.Width / 2.0f;
+			
+			SetPosition(pos, pos);
 			
 			Life = 3.5f;
 			LifeVar = 1;

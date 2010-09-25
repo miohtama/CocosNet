@@ -10,6 +10,7 @@ using System.Drawing;
 using CocosNet.Base;
 using Color = CocosNet.Base.Color;
 using CocosNet.Sprites;
+using CocosNet.Labels;
 
 namespace CocosNet.Actions {
 	public abstract class Action {
@@ -755,8 +756,19 @@ namespace CocosNet.Actions {
 		}
 
 		public override void Update(float t) {
-			TextureNode tn = (TextureNode)Target;
-			tn.Opacity = (byte)(255 * t);
+			TextureNode tn = Target as TextureNode;
+			
+			if (tn != null) {
+				tn.Opacity = (byte)(255 * t);
+			} else {
+				LabelAtlas la = Target as LabelAtlas;
+				if (la != null) {
+					la.Opacity = (byte)(255 * t);
+				}
+				else {
+					throw new InvalidCastException("FadeIn given neither a TextureNode nor a LabelAtlas");
+				}
+			}
 		}
 
 		public override Action Reverse() {

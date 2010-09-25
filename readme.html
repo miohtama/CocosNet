@@ -1,0 +1,109 @@
+<h1>CocosNet</h1>
+
+<p>This readme last changed: 2/23/2010 <br />
+matt.e.greer@gmail.com <br />
+http://github.com/city41/cocosnet  </p>
+
+<h2>CocosNet is...</h2>
+
+<p>A port of <a href="http://www.cocos2d-iphone.org">Cocos2D for the iPhone</a> to the <a href="http://monotouch.net">MonoTouch</a> platform. Cocos2D for the iPhone was in turn a port of <a href="http://www.cocos2d.org">Cocos2D</a> which is written in Python.</p>
+
+<p>CocosNet currently targets MonoTouch for the iPhone and iPad, but it has an ultimate goal of being used in just about any .NET environment (Windows, Windows Phone, Xbox, etc).</p>
+
+<h2>License</h2>
+
+<p>Please see the LICENSE file for licensing info. CocosNet carries the same license as Cocos2D for the iPhone.</p>
+
+<h2>Contributors</h2>
+
+<p>Please see the AUTHORS file for a list of contributors</p>
+
+<h2>How to run</h2>
+
+<ul>
+<li>Compile CocosNetLib and CocosNetTests</li>
+<li>You can just load CocosNET.sln into MonoDevelop and build it (Cmnd-B)</li>
+<li>Launch into the simulator or your device</li>
+<li>By default, cmnd-shift-enter in MonoDevelop should do this</li>
+<li><p>You will be launching the test app, which will load one of the tests and run it.
+To see which test is launched and/or change it, look at Main.cs in CocosNetTests and change the instantiate scene, the code looks like this:</p>
+
+<pre><code>  // To run a different test, instantiate a different class here  
+  // SpriteTest -- SpriteManual  
+  // ParallaxTest -- Parallax1  
+  Scene scene = new Scene(new SpriteManual());
+</code></pre></li>
+</ul>
+
+<h2>What has been ported so far</h2>
+
+<p>The following generally works well in CocosNet</p>
+
+<p>The main infrastructure  </p>
+
+<ul>
+<li>Director</li>
+<li>CocosNode, TextureNode, AtlasNode</li>
+<li>Layer, Scene</li>
+<li>TextureMgr</li>
+<li>Label</li>
+<li>Camera</li>
+<li>Drawing primitives</li>
+<li>etc</li>
+</ul>
+
+<p>Texture Related  </p>
+
+<ul>
+<li>Texture2D  </li>
+<li>PVRTexture  </li>
+</ul>
+
+<p>Atlases  </p>
+
+<ul>
+<li>TextureAtlas and LayerAtlas  </li>
+</ul>
+
+<p>Menus  </p>
+
+<ul>
+<li>Menu  </li>
+<li>MenuItemImage  </li>
+</ul>
+
+<p>Actions  </p>
+
+<ul>
+<li>most sprite oriented actions implemented  </li>
+<li>see SpriteTest.cs and the Actions namespace  </li>
+</ul>
+
+<p>Parallax  </p>
+
+<ul>
+<li>ParallaxNode  </li>
+<li>see ParallaxTest.cs  </li>
+</ul>
+
+<p>Particle Systems  </p>
+
+<ul>
+<li>ParticleSystem base class, PointParticleSystem  </li>
+<li>most point examples  </li>
+<li>ParticleTest.cs  </li>
+</ul>
+
+<h2>How to Contribute</h2>
+
+<p>CocosNet is my first open project like this, please bear with me if I'm not the best coordinator just yet :)</p>
+
+<h3>Small Contribution: Send me a patch</h3>
+
+<p>If you would like to contribute something small (ideally all in one file), please send me a patch. This is very easy to do with Git, here is a nice <a href="http://ariejan.net/2009/10/26/how-to-create-and-apply-a-patch-with-git/">tutorial</a> on how to do that.</p>
+
+<h3>Large Contribution: fork on GitHub</h3>
+
+<p>If you would like to contribute a large bug fix, feature, etc, please fork my main branch on github, add your work, and let me know and I will pull it into the main branch.</p>
+
+<p>Please see the ContributorsGuide.txt file (in the same directory as this file you are reading) for detailed information on contributing to CocosNet: what is needed, how I am approaching the port, reporting/dealing with bugs, etc.</p>

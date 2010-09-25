@@ -24,13 +24,13 @@ namespace CocosNetTests {
 			// so all images can now be loaded by just their name, not "Images\foo.png"
 			TextureMgr.Instance.ImageRoot = "Images";
 			
-			window.BackgroundColor = UIColor.Black;
+			window.BackgroundColor = UIColor.Red;
 			
 			window.UserInteractionEnabled = true;
 			window.MultipleTouchEnabled = false;
+			window.Bounds = new System.Drawing.RectangleF(0, 0, 768, 1024);
 			
-			
-			Director.Instance.DeviceOrientation = DeviceOrientation.LandscapeLeft;
+			Director.Instance.DeviceOrientation = DeviceOrientation.Portrait;
 			Director.Instance.AnimationInterval = 1.0 / 60.0;
 			Director.Instance.IsDisplayFPS = true;
 			

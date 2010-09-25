@@ -170,7 +170,7 @@ namespace CocosNet {
 				
 				GL.PushMatrix();
 				
-				ApplyLandscape();
+				//ApplyLandscape();
 				
 				if (RunningScene != null) {
 					RunningScene.Visit();
@@ -184,10 +184,18 @@ namespace CocosNet {
 				
 				OpenGLView.SwapBuffers();
 			} catch (Exception e) {
+				if (UnhandledException != null) {
+					UnhandledException(this, new UnhandledExceptionEventArgs(e, false));
+				}
+				
+#if DEBUG
 				Console.WriteLine("EXCEPTION: " + e.ToString());
+#endif
 			}
 		}
 
+		public event UnhandledExceptionEventHandler UnhandledException;
+		
 		private bool IsOpenGLAttached {
 			get { return OpenGLView != null && OpenGLView.Superview != null; }
 		}
@@ -357,25 +365,28 @@ namespace CocosNet {
 		}
 
 		public void ApplyLandscape() {
+			float minSpan = Math.Min(WinSize.Width, WinSize.Height) / 2.0f;
+			float maxSpan = Math.Max(WinSize.Width, WinSize.Height) / 2.0f;
+			
 			switch (DeviceOrientation) {
 				case DeviceOrientation.Portrait:
 					// do nothing
 					break;
 				case DeviceOrientation.PortraitUpsideDown:
 					// upside down
-					GL.Translate(160, 240, 0);
+					GL.Translate(minSpan, maxSpan, 0);
 					GL.Rotate(180, 0, 0, 1);
-					GL.Translate(-160, -240, 0);
+					GL.Translate(-minSpan, -maxSpan, 0);
 					break;
 				case DeviceOrientation.LandscapeRight:
-					GL.Translate(160, 240, 0);
+					GL.Translate(minSpan, maxSpan, 0);
 					GL.Rotate(90, 0, 0, 1);
-					GL.Translate(-240, -160, 0);
+					GL.Translate(-maxSpan, -minSpan, 0);
 					break;
 				case DeviceOrientation.LandscapeLeft:
-					GL.Translate(160, 240, 0);
+					GL.Translate(minSpan, maxSpan, 0);
 					GL.Rotate(-90, 0, 0, 1);
-					GL.Translate(-240, -160, 0);
+					GL.Translate(-maxSpan, -minSpan, 0);
 					break;
 			}
 		}

@@ -63,15 +63,18 @@ namespace CocosNet.Labels {
 
 		public LabelAtlas(string text, string charMapFile, int itemWidth, int itemHeight, char mapStartChar) : base(charMapFile, itemWidth, itemHeight, text.Length) {
 			_mapStartChar = mapStartChar;
+			Opacity = 255;
 		}
 
+		public byte Opacity { get; set; }
+		
 		public override void Draw() {
 			GL.EnableClientState(All.VertexArray);
 			GL.EnableClientState(All.TextureCoordArray);
 			
 			GL.Enable(All.Texture2D);
 			
-			GL.Color4(Color.R, Color.G, Color.B, Color.A);
+			GL.Color4(Color.R, Color.G, Color.B, Opacity);
 			
 			bool newBlend = false;
 			if (!BlendFunc.IsDefault) {

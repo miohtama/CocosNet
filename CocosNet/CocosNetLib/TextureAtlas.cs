@@ -180,7 +180,7 @@ namespace CocosNet {
 			
 			InitIndices();
 		}
-
+		
 		public void DrawQuads() {
 			DrawQuads(_quads.Count);
 		}

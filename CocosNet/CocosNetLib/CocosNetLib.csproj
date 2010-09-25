@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <RootNamespace>CocosNetLib</RootNamespace>
     <MtouchSdkVersion>3.0</MtouchSdkVersion>
+    <MtouchMinimumOS>3.0</MtouchMinimumOS>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -117,6 +118,8 @@
     <Compile Include="Primitives.cs" />
     <Compile Include="Vector\PointFExtensions.cs" />
     <Compile Include="Vector\RotationMatrix.cs" />
+    <Compile Include="Layers\TimedScene.cs" />
+    <Compile Include="Support\MessageBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base\" />

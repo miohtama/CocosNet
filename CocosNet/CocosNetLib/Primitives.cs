@@ -4,6 +4,8 @@ using System.Drawing;
 using CocosNet.Base;
 using CocosNet.Vector;
 using OpenTK.Graphics.ES11;
+using Color = CocosNet.Base.Color;
+using System.Collections.Generic;
 
 namespace CocosNet {
 
@@ -76,6 +78,42 @@ namespace CocosNet {
 			
 			GL.DisableClientState(All.VertexArray);
 		}
+		
+//		public static void FillPoly(PointF[] points, Color color) {
+//			if (points == null) {
+//				throw new ArgumentNullException("points");
+//			}
+//			
+//			byte[] colors = new byte[points.Length * 4];
+//			for (int i = 0; i < colors.Length; i += 4) {
+//				colors[i] = color.R;
+//				colors[i + 1] = color.G;
+//				colors[i + 2] = color.B;
+//				colors[i + 3] = color.A;
+//			}
+//			
+//			GL.ColorPointer(4, All.UnsignedByte, 0, colors);
+//			GL.EnableClientState(All.ColorArray);
+//			
+//			
+//			if (color.A != 255) {
+//				GL.BlendFunc(All.SrcAlpha, All.OneMinusSrcAlpha);
+//			}
+//			
+//			Vertex2F[] poli = PointsToVerticesForTriangleStrip(points);
+//			
+//			GL.VertexPointer(2, All.Float, 0, poli);
+//			GL.EnableClientState(All.VertexArray);
+//			
+//			GL.DrawArrays(All.TriangleStrip, 0, poli.Length);
+//			
+//			GL.DisableClientState(All.ColorArray);
+//			GL.DisableClientState(All.VertexArray);
+//			
+//			if (color.A != 255) {
+//				GL.BlendFunc(BlendFunc.DefaultBlendSrc, BlendFunc.DefaultBlendDst);
+//			}
+//		}
 
 		public static void DrawCircle(PointF center, float radius, float a, int segments, bool drawLineToCenter) {
 			int additionalSegment = drawLineToCenter ? 2 : 1;

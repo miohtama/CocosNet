@@ -35,7 +35,7 @@ namespace CocosNet.Base {
 			get { return _children; }
 		}
 
-		public bool IsRunning { get; private set; }
+		public bool IsRunning { get; protected set; }
 
 		public int ZOrder {
 			get { return _zorder; }

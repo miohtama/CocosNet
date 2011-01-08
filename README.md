@@ -16,15 +16,15 @@ Please see the AUTHORS file for a list of contributors
 
 ## Prerequisitements ##
 
-* Apple XCode - http://developer.apple.com/
+* [Apple XCode](http://developer.apple.com/)
 
-* Mono Framework - http://www.go-mono.com/mono-downloads/download.html
+* [Mono Framework](http://www.go-mono.com/mono-downloads/download.html)
 
-* MonoDevelop - http://monodevelop.com/download
+* [MonoDevelop](http://monodevelop.com/download)
 
-* Git - http://www.macports.org
+* [Git](http://www.macports.org)
 
-* OpenTK (Mac desktop) - http://www.opentk.com/files/download-opentk.html
+* [OpenTK,Mac desktop](http://www.opentk.com/files/download-opentk.html)
 
 ## How to run ##
 * Compile CocosNetLib and CocosNetTests
@@ -91,6 +91,29 @@ Particle Systems
 * most point examples  
 * ParticleTest.cs  
 
+## Using OpenTK ##
+
+To use OpenTK, simply add "OpenTK.dll" as a reference to your project. You can find this file under "Binaries/OpenTK".
+
+Additionally, you should add "OpenTK.dll.config" to your project and set it to be copied to your output directory. Without OpenTK.dll.config, your application will not function correctly on Linux or MacOS.
+
+* Download and extract OpenTK
+
+* Choose CocosNetMac project in MonoDeveloper
+
+* Choose Project -> Edit References -> .NET assembly. Add OpenTK.dll
+
+* Right click CocosNetMac
+
+* Add.. File OpenTK.dll.config
+
+* Right click OpenTK.dll.config
+
+* Choose "Copy to output directory"
+
+[More details](http://www.opentk.com/doc)
+
+[Listing OpenTK as assemblies in OSX MonoDevelop](http://www.thebinaryidiot.com/archives/2010/09/26/monodevelop-mysql-connector-reference/)
 
 ## How to Contribute ##
 CocosNet is my first open project like this, please bear with me if I'm not the best coordinator just yet :)
@@ -111,7 +134,9 @@ OpenTK graphics library for Mono - http://www.opentk.com/project/opentk
 
 ### Error: You should provide one root assembly only ###
 
-http://forums.monotouch.net/yaf_postst985.aspx
+This pops up if you try to compile CocosNet without MonoTouch installed
+
+[Also check this thread](http://forums.monotouch.net/yaf_postst985.aspx)
 
 
 

@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CocosNetPortedTests", "Coco
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CocosNetUnitTests", "CocosNetUnitTests\CocosNetUnitTests.csproj", "{779A22C3-599F-464C-A68B-7C9E754C1B39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CocosNetMac", "CocosNetMac\CocosNetMac.csproj", "{CCACDF80-C55D-428E-A528-19C98285F16D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CocosNetIOS", "CocosNetIOS\CocosNetIOS.csproj", "{A1648988-5ADE-4098-A880-C736B8789C53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -31,6 +35,14 @@ Global
 		{779A22C3-599F-464C-A68B-7C9E754C1B39}.Release|iPhone.Build.0 = Release|Any CPU
 		{779A22C3-599F-464C-A68B-7C9E754C1B39}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{779A22C3-599F-464C-A68B-7C9E754C1B39}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{A1648988-5ADE-4098-A880-C736B8789C53}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{A1648988-5ADE-4098-A880-C736B8789C53}.Debug|iPhone.Build.0 = Debug|iPhone
+		{A1648988-5ADE-4098-A880-C736B8789C53}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{A1648988-5ADE-4098-A880-C736B8789C53}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{A1648988-5ADE-4098-A880-C736B8789C53}.Release|iPhone.ActiveCfg = Release|iPhone
+		{A1648988-5ADE-4098-A880-C736B8789C53}.Release|iPhone.Build.0 = Release|iPhone
+		{A1648988-5ADE-4098-A880-C736B8789C53}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{A1648988-5ADE-4098-A880-C736B8789C53}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{BFBBC3E5-4ECF-4262-9658-918A097207D1}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{BFBBC3E5-4ECF-4262-9658-918A097207D1}.Debug|iPhone.Build.0 = Debug|iPhone
 		{BFBBC3E5-4ECF-4262-9658-918A097207D1}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
@@ -39,6 +51,14 @@ Global
 		{BFBBC3E5-4ECF-4262-9658-918A097207D1}.Release|iPhone.Build.0 = Release|iPhone
 		{BFBBC3E5-4ECF-4262-9658-918A097207D1}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{BFBBC3E5-4ECF-4262-9658-918A097207D1}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{CCACDF80-C55D-428E-A528-19C98285F16D}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{CCACDF80-C55D-428E-A528-19C98285F16D}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{CCACDF80-C55D-428E-A528-19C98285F16D}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{CCACDF80-C55D-428E-A528-19C98285F16D}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{CCACDF80-C55D-428E-A528-19C98285F16D}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{CCACDF80-C55D-428E-A528-19C98285F16D}.Release|iPhone.Build.0 = Release|Any CPU
+		{CCACDF80-C55D-428E-A528-19C98285F16D}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{CCACDF80-C55D-428E-A528-19C98285F16D}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = CocosNetPortedTests\CocosNetPortedTests.csproj

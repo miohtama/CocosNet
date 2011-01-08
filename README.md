@@ -14,6 +14,18 @@ Please see the LICENSE file for licensing info. CocosNet carries the same licens
 ## Contributors ##
 Please see the AUTHORS file for a list of contributors
 
+## Prerequisitements ##
+
+* Apple XCode - http://developer.apple.com/
+
+* Mono Framework - http://www.go-mono.com/mono-downloads/download.html
+
+* MonoDevelop - http://monodevelop.com/download
+
+* Git - http://www.macports.org
+
+* OpenTK (Mac desktop) - http://www.opentk.com/files/download-opentk.html
+
 ## How to run ##
 * Compile CocosNetLib and CocosNetTests
 * You can just load CocosNET.sln into MonoDevelop and build it (Cmnd-B)
@@ -90,6 +102,16 @@ If you would like to contribute something small (ideally all in one file), pleas
 If you would like to contribute a large bug fix, feature, etc, please fork my main branch on github, add your work, and let me know and I will pull it into the main branch.
 
 Please see the ContributorsGuide.txt file (in the same directory as this file you are reading) for detailed information on contributing to CocosNet: what is needed, how I am approaching the port, reporting/dealing with bugs, etc.
+
+## Further reading ##
+
+OpenTK graphics library for Mono - http://www.opentk.com/project/opentk
+
+## Troubleshooting ##
+
+### Error: You should provide one root assembly only ###
+
+http://forums.monotouch.net/yaf_postst985.aspx
 
 
 
